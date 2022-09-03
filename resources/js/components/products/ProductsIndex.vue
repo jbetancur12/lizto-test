@@ -1,1 +1,76 @@
-<template>Nada</template>
+<template>
+    <h5><span class="badge bg-success">Listado de Productos</span></h5>
+
+    <div class="text-end">
+        <button type="button" class="btn btn-sm btn-primary">Nuevo</button>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <!-- <th scope="col">Acciones</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <template v-for="item in products" :key="item.id">
+                <tr>
+                    <th scope="row">{{ item.id }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>
+                        <button
+                            type="button"
+                            @click="deleteProduct(item.id)"
+                            class="btn btn-sm btn-danger"
+                        >
+                            Eliminar
+                        </button>
+                    </td>
+                    <!-- <td>
+                        <router-link
+                            :to="{
+                                name: 'companies.edit',
+                                params: { id: item.id },
+                            }"
+                            class="btn btn-sm btn-primary"
+                            >Editar
+                        </router-link>
+                        &nbsp;
+                        <button
+                            type="button"
+                            @click="deleteCompany(item.id)"
+                            class="btn btn-sm btn-danger"
+                        >
+                            Eliminar
+                        </button>
+                    </td> -->
+                </tr>
+            </template>
+        </tbody>
+    </table>
+</template>
+
+<script>
+import useProducts from "../../composables/products";
+import { onMounted } from "vue";
+
+export default {
+    setup() {
+        const { products, getProducts, destroyProduct } = useProducts();
+        onMounted(getProducts);
+
+        const deleteProduct = async (id) => {
+            if (!window.confirm("Estas Seguro?")) {
+                return;
+            }
+            await destroyProduct(id);
+            await getProducts();
+        };
+        return {
+            products,
+            deleteProduct,
+        };
+    },
+};
+</script>
