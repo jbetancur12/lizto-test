@@ -2,7 +2,12 @@
     <h5><span class="badge bg-success">Listado de Productos</span></h5>
 
     <div class="text-end">
-        <button type="button" class="btn btn-sm btn-primary">Nuevo</button>
+        <router-link
+            :to="{ name: 'products.create' }"
+            type="button"
+            class="btn btn-sm btn-primary"
+            >Nuevo</router-link
+        >
     </div>
 
     <table class="table table-striped table-hover">
@@ -19,18 +24,9 @@
                     <th scope="row">{{ item.id }}</th>
                     <td>{{ item.name }}</td>
                     <td>
-                        <button
-                            type="button"
-                            @click="deleteProduct(item.id)"
-                            class="btn btn-sm btn-danger"
-                        >
-                            Eliminar
-                        </button>
-                    </td>
-                    <!-- <td>
                         <router-link
                             :to="{
-                                name: 'companies.edit',
+                                name: 'products.edit',
                                 params: { id: item.id },
                             }"
                             class="btn btn-sm btn-primary"
@@ -39,12 +35,12 @@
                         &nbsp;
                         <button
                             type="button"
-                            @click="deleteCompany(item.id)"
+                            @click="deleteProduct(item.id)"
                             class="btn btn-sm btn-danger"
                         >
                             Eliminar
                         </button>
-                    </td> -->
+                    </td>
                 </tr>
             </template>
         </tbody>

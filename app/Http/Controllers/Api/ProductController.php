@@ -17,7 +17,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return ProductResource::collection(Product::all());
+        return ProductResource::collection(Product::paginate(5));
     }
 
     /**
@@ -29,8 +29,10 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $product = Product::create($request->validated());
+        error_log("---->");
+        error_log($product);
 
-        return ProductResource::collection($product);
+        return new ProductResource($product);
     }
 
     /**
@@ -41,7 +43,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return ProductResource::collection($product);
+        return new ProductResource($product);
     }
 
     /**
@@ -55,7 +57,7 @@ class ProductController extends Controller
     {
          $product->update($request->validated());
 
-        return ProductResource($product);
+        return new ProductResource($product);
     }
 
     /**
