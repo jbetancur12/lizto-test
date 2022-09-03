@@ -5,7 +5,7 @@ import { useRouter } from "vue-router"
 export default function useProducts() {
     const errors = ref([])
     const router = useRouter()
-    const products = ref([])
+    const products = ref({})
     const product = ref([])
 
     const getProduct = async (id) => {
@@ -13,10 +13,16 @@ export default function useProducts() {
         product.value = response.data.data
     }
 
-    const getProducts = async () => {
-        let response = await axios.get('/api/products')
-        products.value = response.data.data
+    // const getProducts = async () => {
+    //     let response = await axios.get('/api/products')
+    //     products.value = response.data.data
+    // }
+
+    const getProducts = async (page) => {
+        let response = await axios.get('/api/products?page=' + page)
+        products.value = response.data
     }
+
 
     const storeProduct = async (data) => {
         errors.value = ''

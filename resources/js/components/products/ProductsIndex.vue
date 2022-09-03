@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <template v-for="item in products" :key="item.id">
+            <template v-for="item in products.data" :key="item.id">
                 <tr>
                     <th scope="row">{{ item.id }}</th>
                     <td>{{ item.name }}</td>
@@ -45,6 +45,8 @@
             </template>
         </tbody>
     </table>
+
+    <Pagination :data="products" @pagination-change-page="getProducts" />
 </template>
 
 <script>
