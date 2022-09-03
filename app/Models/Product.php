@@ -9,4 +9,10 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
+
+    public function scopeSearchByName($query, $value){
+        if(isset($value)){
+            return $query->where('name', 'like', "%$value%");
+        }
+    }
 }

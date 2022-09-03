@@ -14,9 +14,17 @@ class ProductController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     *
      */
-    public function index()
+    private $NUM_PAGES = 5;
+    public function index(Request $request)
     {
+        // $name = $request->$name;
+        // $name = $request->route('name');
+        // error_log($request);
+        // $products = Product::searchByName($name)->paginate($this->NUM_PAGES)->withQueryString();
+        // return ProductResource::collection($products);
+
         return ProductResource::collection(Product::all());
         // return ProductResource::collection(Product::paginate(5));
     }

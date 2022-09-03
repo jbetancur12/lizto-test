@@ -7,6 +7,8 @@ export default function useProducts() {
     const router = useRouter()
     const products = ref({})
     const product = ref([])
+    // Search
+    const queryName = ref('')
 
     const getProduct = async (id) => {
         let response = await axios.get('/api/products/' + id)
@@ -19,7 +21,8 @@ export default function useProducts() {
     // }
 
     const getProducts = async (page) => {
-        let response = await axios.get('/api/products?page=' + page)
+        console.log("entro");
+        let response = await axios.get('/api/products?page=' + page + '&name=' + queryName.value)
         products.value = response.data
     }
 
@@ -57,6 +60,7 @@ export default function useProducts() {
         errors,
         product,
         products,
+        queryName,
         getProduct,
         getProducts,
         storeProduct,

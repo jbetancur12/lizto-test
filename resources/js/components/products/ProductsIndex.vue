@@ -10,6 +10,23 @@
         >
     </div>
 
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group d-flex">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Buscar por nombre"
+                    v-model="queryName"
+                />
+                &nbsp;
+                <button @click="getProducts" class="btn btn-sm btn-primary">
+                    Buscar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <table class="table table-striped table-hover">
         <thead>
             <tr>
@@ -55,7 +72,8 @@ import { onMounted } from "vue";
 
 export default {
     setup() {
-        const { products, getProducts, destroyProduct } = useProducts();
+        const { queryName, products, getProducts, destroyProduct } =
+            useProducts();
         onMounted(getProducts);
 
         const deleteProduct = async (id) => {
@@ -68,6 +86,7 @@ export default {
         return {
             products,
             deleteProduct,
+            queryName,
         };
     },
 };
