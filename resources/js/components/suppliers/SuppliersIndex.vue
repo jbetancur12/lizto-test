@@ -1,9 +1,9 @@
 <template>
-    <h5><span class="badge bg-success">Listado de Productos</span></h5>
+    <h5><span class="badge bg-success">Listado de Suppliers</span></h5>
 
     <div class="text-end">
         <router-link
-            :to="{ name: 'products.create' }"
+            :to="{ name: 'suppliers.create' }"
             type="button"
             class="btn btn-sm btn-primary"
             >Nuevo</router-link
@@ -20,7 +20,7 @@
                     v-model="queryName"
                 />
                 &nbsp;
-                <button @click="getProducts" class="btn btn-sm btn-primary">
+                <button @click="getSuppliers" class="btn btn-sm btn-primary">
                     Buscar
                 </button>
             </div>
@@ -36,14 +36,14 @@
             </tr>
         </thead>
         <tbody>
-            <template v-for="item in products.data" :key="item.id">
+            <template v-for="item in suppliers.data" :key="item.id">
                 <tr>
                     <th scope="row">{{ item.id }}</th>
                     <td>{{ item.name }}</td>
                     <td>
                         <router-link
                             :to="{
-                                name: 'products.edit',
+                                name: 'suppliers.edit',
                                 params: { id: item.id },
                             }"
                             class="btn btn-sm btn-primary"
@@ -52,7 +52,7 @@
                         &nbsp;
                         <button
                             type="button"
-                            @click="deleteProduct(item.id)"
+                            @click="deleteSupplier(item.id)"
                             class="btn btn-sm btn-danger"
                         >
                             Eliminar
@@ -63,29 +63,29 @@
         </tbody>
     </table>
 
-    <Pagination :data="products" @pagination-change-page="getProducts" />
+    <Pagination :data="suppliers" @pagination-change-page="getSuppliers" />
 </template>
 
 <script>
-import useProducts from "../../composables/products";
+import useSuppliers from "../../composables/suppliers";
 import { onMounted } from "vue";
 
 export default {
     setup() {
-        const { queryName, products, getProducts, destroyProduct } =
-            useProducts();
-        onMounted(getProducts);
+        const { queryName, suppliers, getSuppliers, destroySupplier } =
+            useSuppliers();
+        onMounted(getSuppliers);
 
-        const deleteProduct = async (id) => {
+        const deleteSupplier = async (id) => {
             if (!window.confirm("Estas Seguro?")) {
                 return;
             }
-            await destroyProduct(id);
-            await getProducts();
+            await destroySupplier(id);
+            await getSuppliers();
         };
         return {
-            products,
-            deleteProduct,
+            suppliers,
+            deleteSupplier,
             queryName,
         };
     },

@@ -1,11 +1,11 @@
 <template>
-    <h5><span class="badge bg-success">Editar Producto</span></h5>
+    <h5><span class="badge bg-success">Editar Suppliers</span></h5>
 
-    <form @submit.prevent="saveProduct">
+    <form @submit.prevent="saveSupplier">
         <div class="from-group">
-            <label for="">Nombre del Producto</label>
+            <label for="">Nombre del Suppliers</label>
             <input
-                v-model="product.name"
+                v-model="supplier.name"
                 type="text"
                 name="name"
                 class="form-control"
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import useProducts from "../../composables/products";
+import useSuppliers from "../../composables/suppliers";
 import { onMounted } from "vue";
 export default {
     props: {
@@ -28,16 +28,17 @@ export default {
         },
     },
     setup(props) {
-        const { errors, product, getProduct, updateProduct } = useProducts();
-        onMounted(getProduct(props.id));
+        const { errors, supplier, getSupplier, updateSupplier } =
+            useSuppliers();
+        onMounted(getSupplier(props.id));
 
-        const saveProduct = async () => {
-            await updateProduct(props.id);
+        const saveSupplier = async () => {
+            await updateSupplier(props.id);
         };
         return {
             errors,
-            product,
-            saveProduct,
+            supplier,
+            saveSupplier,
         };
     },
 };

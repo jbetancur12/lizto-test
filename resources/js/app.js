@@ -3,6 +3,7 @@ require('./bootstrap');
 import { createApp, defineComponent } from "vue";
 
 import router from './router'
+import App from './App.vue'
 import ProductsIndex from './components/products/ProductsIndex'
 import ProductsCreate from './components/products/ProductsCreate'
 import ProductsEdit from './components/products/ProductsEdit'
@@ -15,13 +16,14 @@ import Pagination from "laravel-vue-pagination";
 
 
 const root = defineComponent({
-    SuppliersIndex
+    App
 })
 
 const app = createApp(root)
 
 app.use(router)
 
+app.component('App', App)
 app.component('ProductsIndex', ProductsIndex);
 app.component('ProductsCreate', ProductsCreate);
 app.component('ProductsEdit', ProductsEdit);

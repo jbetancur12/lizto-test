@@ -1,5 +1,5 @@
 <template>
-    <h5><span class="badge bg-success">Crear Producto</span></h5>
+    <h5><span class="badge bg-success">Crear Suppliers</span></h5>
 
     <div v-if="errors">
         <div v-for="(v, k) in errors" :key="k">
@@ -9,9 +9,9 @@
         </div>
     </div>
 
-    <form @submit.prevent="saveProduct">
+    <form @submit.prevent="saveSupplier">
         <div class="from-group">
-            <label for="">Nombre del Producto</label>
+            <label for="">Nombre del Suppliers</label>
             <input
                 v-model="form.name"
                 type="text"
@@ -27,22 +27,22 @@
 
 <script>
 import { reactive } from "vue";
-import useProducts from "../../composables/products";
+import useSuppliers from "../../composables/suppliers";
 
 export default {
     setup() {
-        const { errors, storeProduct } = useProducts();
+        const { errors, storeSupplier } = useSuppliers();
         const form = reactive({
             name: "",
         });
 
-        const saveProduct = async () => {
-            await storeProduct({ ...form });
+        const saveSupplier = async () => {
+            await storeSupplier({ ...form });
         };
 
         return {
             form,
-            saveProduct,
+            saveSupplier,
             errors,
         };
     },
