@@ -12,6 +12,10 @@ import SuppliersIndex from './components/suppliers/SuppliersIndex'
 import SuppliersCreate from './components/suppliers/SuppliersCreate'
 import SuppliersEdit from './components/suppliers/SuppliersEdit'
 
+import PurchasesIndex from './components/purchases/PurchasesIndex'
+import PurchasesCreate from './components/purchases/PurchasesCreate'
+import PurchasesEdit from './components/purchases/PurchasesEdit'
+
 import Pagination from "laravel-vue-pagination";
 
 
@@ -31,6 +35,10 @@ app.component('ProductsEdit', ProductsEdit);
 app.component('SuppliersIndex', SuppliersIndex);
 app.component('SuppliersCreate', SuppliersCreate);
 app.component('SuppliersEdit', SuppliersEdit);
+
+app.component('PurchasesIndex', PurchasesIndex);
+app.component('PurchasesCreate', PurchasesCreate);
+app.component('PurchasesEdit', PurchasesEdit);
 
 app.component('Pagination', Pagination)
 

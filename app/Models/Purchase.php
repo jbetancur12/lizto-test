@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Purchase extends Model
 {
     use HasFactory;
+     protected $fillable = ['state','total_cost','supplier_id'];
 
     public function supplier(){
         return $this->belongsTo('App\Models\Supplier');
