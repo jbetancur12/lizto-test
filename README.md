@@ -2,6 +2,8 @@
 
 CRUD in Laravel and Vue3
 
+-   [Demo](http://lizto.betancurdev.tk)
+
 ## Environment
 
 -   Laravel 8
