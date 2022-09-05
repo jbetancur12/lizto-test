@@ -2,7 +2,7 @@
 
 CRUD in Laravel and Vue3
 
--   [Demo](http://lizto.betancurdev.tk)
+-   [Demo](http://lizto.betancurdev.tk/home)
 
 ## Environment
 
