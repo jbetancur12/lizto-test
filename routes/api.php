@@ -25,4 +25,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('products', ProductController::class);
 Route::apiResource('suppliers', SupplierController::class);
 Route::apiResource('purchases', PurchaseController::class);
-Route::apiResource('purchases', PurchaseDetailController::class);
+Route::apiResource('purchase-details', PurchaseDetailController::class);

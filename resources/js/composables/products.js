@@ -21,7 +21,6 @@ export default function useProducts() {
     // }
 
     const getProducts = async (page) => {
-        console.log("entro");
         let response = await axios.get('/api/products?page=' + page + '&name=' + queryName.value)
         products.value = response.data
     }

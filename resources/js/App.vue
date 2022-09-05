@@ -23,4 +23,12 @@
             >Purchases</router-link
         >
     </div>
+    <div class="">
+        <router-link
+            :to="{ name: 'purchaseDetails.index' }"
+            type="button"
+            class="btn btn-sm btn-primary"
+            >Purchase Details</router-link
+        >
+    </div>
 </template>

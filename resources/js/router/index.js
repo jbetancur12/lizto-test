@@ -14,6 +14,10 @@ import PurchasesIndex from '../components/purchases/PurchasesIndex.vue'
 import PurchasesCreate from '../components/purchases/PurchasesCreate.vue'
 import PurchasesEdit from '../components/purchases/PurchasesEdit.vue'
 
+import PurchaseDetailsIndex from '../components/purchaseDetails/PurchaseDetailsIndex.vue'
+import PurchaseDetailsCreate from '../components/purchaseDetails/PurchaseDetailsCreate.vue'
+import PurchaseDetailsEdit from '../components/purchaseDetails/PurchaseDetailsEdit.vue'
+
 
 
 const routes = [
@@ -68,6 +72,22 @@ const routes = [
         path: '/purchases/:id/edit',
         name: 'purchases.edit',
         component: PurchasesEdit,
+        props: true
+    },
+    {
+        path: '/purchase-details',
+        name: 'purchaseDetails.index',
+        component: PurchaseDetailsIndex
+    },
+    {
+        path: '/purchase-details/create',
+        name: 'purchaseDetails.create',
+        component: PurchaseDetailsCreate
+    },
+    {
+        path: '/purchase-details/:id/edit',
+        name: 'purchaseDetails.edit',
+        component: PurchaseDetailsEdit,
         props: true
     }
 ]

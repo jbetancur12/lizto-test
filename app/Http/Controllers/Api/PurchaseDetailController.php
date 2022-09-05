@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\PurchaseDetail;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\PurchaseDetailRequest;
+use App\Http\Resources\PurchaseDetailResource;
 
 class PurchaseDetailController extends Controller
 {
@@ -15,7 +16,7 @@ class PurchaseDetailController extends Controller
      */
     public function index()
     {
-        //
+        return PurchaseDetailResource::collection(PurchaseDetail::all());
     }
 
     /**
@@ -24,9 +25,11 @@ class PurchaseDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PurchaseDetailRequest $request)
     {
-        //
+        $purchaseDetail = PurchaseDetail::create($request->validated());
+
+        return new PurchaseDetailResource($purchaseDetail);
     }
 
     /**
@@ -37,7 +40,7 @@ class PurchaseDetailController extends Controller
      */
     public function show(PurchaseDetail $purchaseDetail)
     {
-        //
+        return new PurchaseDetailResource($purchaseDetail);
     }
 
     /**
@@ -47,9 +50,11 @@ class PurchaseDetailController extends Controller
      * @param  \App\Models\PurchaseDetail  $purchaseDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PurchaseDetail $purchaseDetail)
+    public function update(PurchaseDetailRequest $request, PurchaseDetail $purchaseDetail)
     {
-        //
+        $purchaseDetail->update($request->validated());
+
+        return new PurchaseDetailResource($purchaseDetail);
     }
 
     /**
@@ -60,6 +65,8 @@ class PurchaseDetailController extends Controller
      */
     public function destroy(PurchaseDetail $purchaseDetail)
     {
-        //
+        $purchaseDetail->delete($purchaseDetail);
+
+        return response()->noContent();
     }
 }

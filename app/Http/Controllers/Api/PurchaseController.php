@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Purchase;
-use App\Models\Supplier;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PurchaseRequest;
 use App\Http\Resources\PurchaseResource;
@@ -29,7 +27,7 @@ class PurchaseController extends Controller
      */
     public function store(PurchaseRequest $request)
     {
-               $purchase = Purchase::create($request->validated());
+        $purchase = Purchase::create($request->validated());
 
         return new PurchaseResource($purchase);
     }
@@ -54,7 +52,7 @@ class PurchaseController extends Controller
      */
     public function update(PurchaseRequest $request, Purchase $purchase)
     {
-         $purchase->update($request->validated());
+        $purchase->update($request->validated());
 
         return new PurchaseResource($purchase);
     }
@@ -67,7 +65,7 @@ class PurchaseController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
-         $purchase->delete($purchase);
+        $purchase->delete($purchase);
 
         return response()->noContent();
     }

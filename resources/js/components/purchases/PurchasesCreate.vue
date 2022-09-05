@@ -86,8 +86,6 @@ export default {
             await storePurchase({ ...form });
         };
 
-        console.log(suppliers);
-
         return {
             form,
             savePurchase,

@@ -16,6 +16,10 @@ import PurchasesIndex from './components/purchases/PurchasesIndex'
 import PurchasesCreate from './components/purchases/PurchasesCreate'
 import PurchasesEdit from './components/purchases/PurchasesEdit'
 
+import PurchaseDetailsIndex from './components/purchaseDetails/PurchaseDetailsIndex.vue'
+import PurchaseDetailsCreate from './components/purchaseDetails/PurchaseDetailsCreate.vue'
+import PurchaseDetailsEdit from './components/purchaseDetails/PurchaseDetailsEdit.vue'
+
 import Pagination from "laravel-vue-pagination";
 
 
@@ -39,6 +43,10 @@ app.component('SuppliersEdit', SuppliersEdit);
 app.component('PurchasesIndex', PurchasesIndex);
 app.component('PurchasesCreate', PurchasesCreate);
 app.component('PurchasesEdit', PurchasesEdit);
+
+app.component('PurchaseDetailsIndex', PurchaseDetailsIndex);
+app.component('PurchaseDetailsCreate', PurchaseDetailsCreate);
+app.component('PurchaseDetailsEdit', PurchaseDetailsEdit);
 
 app.component('Pagination', Pagination)
 

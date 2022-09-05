@@ -80,9 +80,6 @@ export default {
             await updatePurchase(props.id);
         };
 
-        console.log(suppliers);
-        // console.log(supplier);
-
         return {
             errors,
             purchase,
