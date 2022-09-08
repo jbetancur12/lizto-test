@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
@@ -24,6 +25,10 @@ class ProductController extends Controller
         // error_log($request);
         // $products = Product::searchByName($name)->paginate($this->NUM_PAGES)->withQueryString();
         // return ProductResource::collection($products);
+
+        // if(auth()->guest()){
+        //   abort(Response::HTTP_FORBIDDEN);
+        // }
 
         return ProductResource::collection(Product::all());
         // return ProductResource::collection(Product::paginate(5));

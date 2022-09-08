@@ -21,79 +21,79 @@ import PurchaseDetailsEdit from '../components/purchaseDetails/PurchaseDetailsEd
 
 
 const routes = [
-    {
-        path: '/home',
-        name: 'home',
-        component: App
-    },
-    {
-        path: '/products',
-        name: 'products.index',
-        component: ProductsIndex
-    },
-    {
-        path: '/products/create',
-        name: 'products.create',
-        component: ProductsCreate
-    },
-    {
-        path: '/products/:id/edit',
-        name: 'products.edit',
-        component: ProductsEdit,
-        props: true
-    },
-    {
-        path: '/suppliers',
-        name: 'suppliers.index',
-        component: SuppliersIndex
-    },
-    {
-        path: '/suppliers/create',
-        name: 'suppliers.create',
-        component: SuppliersCreate
-    },
-    {
-        path: '/suppliers/:id/edit',
-        name: 'suppliers.edit',
-        component: SuppliersEdit,
-        props: true
-    },
-    {
-        path: '/purchases',
-        name: 'purchases.index',
-        component: PurchasesIndex
-    },
-    {
-        path: '/purchases/create',
-        name: 'purchases.create',
-        component: PurchasesCreate
-    },
-    {
-        path: '/purchases/:id/edit',
-        name: 'purchases.edit',
-        component: PurchasesEdit,
-        props: true
-    },
-    {
-        path: '/purchase-details',
-        name: 'purchaseDetails.index',
-        component: PurchaseDetailsIndex
-    },
-    {
-        path: '/purchase-details/create',
-        name: 'purchaseDetails.create',
-        component: PurchaseDetailsCreate
-    },
-    {
-        path: '/purchase-details/:id/edit',
-        name: 'purchaseDetails.edit',
-        component: PurchaseDetailsEdit,
-        props: true
-    }
+  {
+    path: '/',
+    name: 'home',
+    component: App
+  },
+  {
+    path: '/products',
+    name: 'products.index',
+    component: ProductsIndex
+  },
+  {
+    path: '/products/create',
+    name: 'products.create',
+    component: ProductsCreate
+  },
+  {
+    path: '/products/:id/edit',
+    name: 'products.edit',
+    component: ProductsEdit,
+    props: true
+  },
+  {
+    path: '/suppliers',
+    name: 'suppliers.index',
+    component: SuppliersIndex
+  },
+  {
+    path: '/suppliers/create',
+    name: 'suppliers.create',
+    component: SuppliersCreate
+  },
+  {
+    path: '/suppliers/:id/edit',
+    name: 'suppliers.edit',
+    component: SuppliersEdit,
+    props: true
+  },
+  {
+    path: '/purchases',
+    name: 'purchases.index',
+    component: PurchasesIndex
+  },
+  {
+    path: '/purchases/create',
+    name: 'purchases.create',
+    component: PurchasesCreate
+  },
+  {
+    path: '/purchases/:id/edit',
+    name: 'purchases.edit',
+    component: PurchasesEdit,
+    props: true
+  },
+  {
+    path: '/purchase-details',
+    name: 'purchaseDetails.index',
+    component: PurchaseDetailsIndex
+  },
+  {
+    path: '/purchase-details/create',
+    name: 'purchaseDetails.create',
+    component: PurchaseDetailsCreate
+  },
+  {
+    path: '/purchase-details/:id/edit',
+    name: 'purchaseDetails.edit',
+    component: PurchaseDetailsEdit,
+    props: true
+  }
 ]
 
 
 export default createRouter({
-    history: createWebHistory(),
-    routes
+  history: createWebHistory(),
+  routes
 })
