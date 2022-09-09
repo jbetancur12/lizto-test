@@ -55,7 +55,7 @@
                     </div>
                 </li>
 
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
                         <i class="far fa-comments"></i>
                         <span class="badge badge-danger navbar-badge">3</span>
@@ -142,15 +142,14 @@
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                     </div>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"
-                        role="button">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
@@ -173,7 +172,7 @@
                         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="/" class="d-block">{{ auth()->user()->name }}</a>
                     </div>
                 </div>
 
@@ -217,7 +216,7 @@
                         </li> --}}
                         <li class="nav-item">
                             <a href="/products" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-warehouse"></i>
                                 <p>
                                     Products
                                 </p>
@@ -226,7 +225,7 @@
 
                         <li class="nav-item">
                             <a href="/suppliers" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-boxes-packing"></i>
                                 <p>
                                     Suppliers
                                 </p>
@@ -235,7 +234,7 @@
 
                         <li class="nav-item">
                             <a href="/purchases" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon fas fa-cart-shopping"></i>
                                 <p>
                                     Purchases
                                 </p>
