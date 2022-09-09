@@ -15,6 +15,7 @@ import SuppliersEdit from './components/suppliers/SuppliersEdit'
 import PurchasesIndex from './components/purchases/PurchasesIndex'
 import PurchasesCreate from './components/purchases/PurchasesCreate'
 import PurchasesEdit from './components/purchases/PurchasesEdit'
+import PurchasesGeneral from './components/purchases/PurchasesGeneral'
 
 import PurchaseDetailsIndex from './components/purchaseDetails/PurchaseDetailsIndex.vue'
 import PurchaseDetailsCreate from './components/purchaseDetails/PurchaseDetailsCreate.vue'
@@ -24,7 +25,7 @@ import Pagination from "laravel-vue-pagination";
 
 
 const root = defineComponent({
-    App
+  App
 })
 
 const app = createApp(root)

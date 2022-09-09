@@ -13,6 +13,7 @@ import SuppliersEdit from '../components/suppliers/SuppliersEdit.vue'
 import PurchasesIndex from '../components/purchases/PurchasesIndex.vue'
 import PurchasesCreate from '../components/purchases/PurchasesCreate.vue'
 import PurchasesEdit from '../components/purchases/PurchasesEdit.vue'
+import PurchasesGeneral from '../components/purchases/PurchasesGeneral.vue'
 
 import PurchaseDetailsIndex from '../components/purchaseDetails/PurchaseDetailsIndex.vue'
 import PurchaseDetailsCreate from '../components/purchaseDetails/PurchaseDetailsCreate.vue'
@@ -63,6 +64,7 @@ const routes = [
     name: 'purchases.index',
     component: PurchasesIndex
   },
+
   {
     path: '/purchases/create',
     name: 'purchases.create',
@@ -73,6 +75,11 @@ const routes = [
     name: 'purchases.edit',
     component: PurchasesEdit,
     props: true
+  },
+  {
+    path: '/purchases/general',
+    name: 'purchases.general',
+    component: PurchasesGeneral
   },
   {
     path: '/purchase-details',
