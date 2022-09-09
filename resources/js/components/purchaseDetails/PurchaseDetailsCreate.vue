@@ -64,10 +64,11 @@
             <label for="">Costo Total</label>
 
             <input
-                v-model="form.total_cost"
+                :value="grandTotal"
                 type="number"
                 name="total_cost"
                 class="form-control"
+                readonly
             />
         </div>
 
@@ -113,6 +114,13 @@ export default {
             products,
             purchases,
         };
+    },
+    computed: {
+        grandTotal() {
+            let costTotal = this.form.cost * this.form.quantity;
+            this.form.total_cost = costTotal;
+            return costTotal;
+        },
     },
 };
 </script>

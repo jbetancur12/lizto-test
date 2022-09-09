@@ -81,6 +81,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/purchase-details" class="nav-link">
+                        <i class="nav-icon fas fa-info-circle"></i>
+                        <p>
+                            Purchase Details
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
 
