@@ -4,7 +4,7 @@
             <button
                 class="btn btn-secondary"
                 title="Click to add row"
-                @click="addRow"
+                @click.prevent="addRow"
             >
                 <span class="fa fa-plus-square"></span>
                 &nbsp;Add Product
@@ -46,7 +46,10 @@
                             aria-label="Quantity"
                             name="quantity"
                             v-model="purchaseDetail.quantity"
-                            @input="purchaseDetails.totalCost(index)"
+                            @input="
+                                purchaseDetails.totalCost(index),
+                                    purchaseDetails.sumTotal()
+                            "
                         />
                     </td>
                     <td>
@@ -57,7 +60,10 @@
                             aria-label="Cost"
                             name="'cost"
                             v-model="purchaseDetail.cost"
-                            @input="purchaseDetails.totalCost(index)"
+                            @input="
+                                purchaseDetails.totalCost(index),
+                                    purchaseDetails.sumTotal()
+                            "
                         />
                     </td>
                     <td>{{ purchaseDetail.total_cost }}</td>
@@ -99,5 +105,8 @@ const addRow = () => {
     });
 };
 
-const removeRow = (index) => purchaseDetails.products.splice(index, 1);
+const removeRow = (index) => {
+    purchaseDetails.products.splice(index, 1);
+    purchaseDetails.sumTotal();
+};
 </script>

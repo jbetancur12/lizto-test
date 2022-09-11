@@ -70,28 +70,18 @@
     <Pagination :data="purchases" @pagination-change-page="getPurchases" />
 </template>
 
-<script>
+<script setup>
 import usePurchases from "../../composables/purchases";
 import { onMounted } from "vue";
 
-export default {
-    setup() {
-        const { queryName, purchases, getPurchases, destroyPurchase } =
-            usePurchases();
-        onMounted(getPurchases);
+const { queryName, purchases, getPurchases, destroyPurchase } = usePurchases();
+onMounted(getPurchases);
 
-        const deletePurchase = async (id) => {
-            if (!window.confirm("Estas Seguro?")) {
-                return;
-            }
-            await destroyPurchase(id);
-            await getPurchases();
-        };
-        return {
-            purchases,
-            deletePurchase,
-            queryName,
-        };
-    },
+const deletePurchase = async (id) => {
+    if (!window.confirm("Estas Seguro?")) {
+        return;
+    }
+    await destroyPurchase(id);
+    await getPurchases();
 };
 </script>

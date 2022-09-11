@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <form @submit.prevent="savePurchase">
+    <form>
         <div class="from-group">
             <label for="">Estado</label>
             <select
@@ -29,16 +29,16 @@
                 class="form-control"
             /> -->
         </div>
-        <div class="from-group">
+        <!-- <div class="from-group">
             <label for="">Costo Total</label>
 
             <input
-                v-model="form.total_cost"
+                :value="purchaseDetails.grandTotal"
                 type="number"
                 name="total_cost"
                 class="form-control"
             />
-        </div>
+        </div> -->
         <div class="from-group">
             <label for="">Supplier Id</label>
             <select
@@ -52,13 +52,24 @@
             </select>
         </div>
 
+        <hr class="bg-primary border-2 border-top border-primary" />
+
+        <AddProduct />
         <hr class="bg-secondary border-2 border-top border-secondary" />
+        <div class="d-flex justify-content-end align-items-baseline gap-2 mr-5">
+            <strong>Total:</strong>
+            <span>&nbsp;{{ purchaseDetails.grandTotal }}</span>
+        </div>
 
         <div class="form-group mt-2">
-            <button class="btn btn-sm btn-success">Guardar</button>
+            <button
+                class="btn btn-sm btn-success"
+                @click.prevent="savePurchase"
+            >
+                Guardar
+            </button>
         </div>
     </form>
-    <AddProduct />
 </template>
 
 <script setup>
@@ -66,11 +77,14 @@ import { onMounted, reactive } from "vue";
 import usePurchases from "../../composables/purchases";
 import useSuppliers from "../../composables/suppliers";
 import AddProduct from "./AddProduct.vue";
+import { useCounterStore } from "../../stores/purchaseStore";
 
 const { errors, storePurchase } = usePurchases();
 const { suppliers, getSuppliers } = useSuppliers();
 
 onMounted(getSuppliers);
+
+const purchaseDetails = useCounterStore();
 
 const form = reactive({
     state: "",
@@ -79,6 +93,6 @@ const form = reactive({
 });
 
 const savePurchase = async () => {
-    await storePurchase({ ...form });
+    await storePurchase({ ...form, total_cost: purchaseDetails.grandTotal });
 };
 </script>

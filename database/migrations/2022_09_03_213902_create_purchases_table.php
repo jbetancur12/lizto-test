@@ -16,7 +16,7 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
             $table->enum('state', array('IN_PROGRESS', 'RECEIVED', 'CANCELLED'));
-            $table->decimal('total_cost', 5, 2);
+            $table->float('total_cost');
             $table->unsignedBigInteger('supplier_id');
 
             $table->foreign('supplier_id')
