@@ -41,13 +41,6 @@
         </div>
         <div class="from-group">
             <label for="">Supplier Id</label>
-            <!-- <input
-                v-model="form.supplier_id"
-                type="number"
-                name="supplier_id"
-                class="form-control"
-            /> -->
-
             <select
                 v-model="form.supplier_id"
                 name="supplier_id"
@@ -58,40 +51,34 @@
                 </option>
             </select>
         </div>
+
+        <hr class="bg-secondary border-2 border-top border-secondary" />
+
         <div class="form-group mt-2">
             <button class="btn btn-sm btn-success">Guardar</button>
         </div>
     </form>
+    <AddProduct />
 </template>
 
-<script>
+<script setup>
 import { onMounted, reactive } from "vue";
 import usePurchases from "../../composables/purchases";
 import useSuppliers from "../../composables/suppliers";
+import AddProduct from "./AddProduct.vue";
 
-export default {
-    setup() {
-        const { errors, storePurchase } = usePurchases();
-        const { suppliers, getSuppliers } = useSuppliers();
+const { errors, storePurchase } = usePurchases();
+const { suppliers, getSuppliers } = useSuppliers();
 
-        onMounted(getSuppliers);
+onMounted(getSuppliers);
 
-        const form = reactive({
-            state: "",
-            total_cost: 1000,
-            supplier_id: 3,
-        });
+const form = reactive({
+    state: "",
+    total_cost: 1000,
+    supplier_id: 3,
+});
 
-        const savePurchase = async () => {
-            await storePurchase({ ...form });
-        };
-
-        return {
-            form,
-            savePurchase,
-            errors,
-            suppliers,
-        };
-    },
+const savePurchase = async () => {
+    await storePurchase({ ...form });
 };
 </script>
