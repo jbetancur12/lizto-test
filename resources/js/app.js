@@ -1,6 +1,7 @@
 require('./bootstrap');
 
 import { createApp, defineComponent } from "vue";
+import { createPinia } from 'pinia'
 
 import router from './router'
 import App from './App.vue'
@@ -29,6 +30,8 @@ const root = defineComponent({
 })
 
 const app = createApp(root)
+
+app.use(createPinia())
 
 app.use(router)
 
