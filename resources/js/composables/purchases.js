@@ -24,8 +24,25 @@ export default function usePurchases() {
 
     const storePurchase = async (data) => {
         errors.value = ''
+        const dataPurchase = {
+                state: data.state,
+                total_cost: data.total_cost,
+                supplier_id: data.supplier_id,
+
+        }
+         const dataPurchaseDetails = { ...data.products
+
+        }
+
+
         try {
-            await axios.post('/api/purchases', data);
+            const purchaseCreated = await axios.post('/api/purchases', dataPurchase);
+
+            const newArray = data.products.map(item => ({...item, purchase_id:purchaseCreated.data.data.id}))
+
+            console.log(newArray);
+
+            await axios.post('/api/purchase-details', newArray);
             await router.push({ name: "purchases.index" })
         } catch (error) {
             if (error.response.status === 422) {

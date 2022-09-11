@@ -6,6 +6,7 @@ use App\Models\PurchaseDetail;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PurchaseDetailRequest;
 use App\Http\Resources\PurchaseDetailResource;
+use \Illuminate\Http\Request;
 
 class PurchaseDetailController extends Controller
 {
@@ -25,11 +26,20 @@ class PurchaseDetailController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PurchaseDetailRequest $request)
+    public function store(Request $request)
     {
-        $purchaseDetail = PurchaseDetail::create($request->validated());
+         $data = $request->all();
 
-        return new PurchaseDetailResource($purchaseDetail);
+    foreach ($data as $key => $value) {
+        PurchaseDetail::create($value);
+    }
+
+    return response()->noContent();
+
+        // die();
+        // $purchaseDetail = PurchaseDetail::create($request->validated());
+
+        // return new PurchaseDetailResource($purchaseDetail);
     }
 
     /**

@@ -93,6 +93,10 @@ const form = reactive({
 });
 
 const savePurchase = async () => {
-    await storePurchase({ ...form, total_cost: purchaseDetails.grandTotal });
+    await storePurchase({
+        ...form,
+        total_cost: purchaseDetails.grandTotal,
+        products: purchaseDetails.products,
+    });
 };
 </script>
