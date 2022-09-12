@@ -2,10 +2,7 @@
     <h5><span class="badge bg-success">Listado de Productos</span></h5>
 
     <div class="text-end">
-        <router-link
-            :to="{ name: 'products.create' }"
-            type="button"
-            class="btn btn-sm btn-primary"
+        <router-link :to="{ name: 'products.create' }" type="button" class="btn btn-sm btn-primary"
             >Nuevo</router-link
         >
     </div>
@@ -14,15 +11,13 @@
         <div class="col-md-4">
             <div class="form-group d-flex">
                 <input
+                    v-model="queryName"
                     type="text"
                     class="form-control"
                     placeholder="Buscar por nombre"
-                    v-model="queryName"
                 />
                 &nbsp;
-                <button @click="getProducts" class="btn btn-sm btn-primary">
-                    Buscar
-                </button>
+                <button class="btn btn-sm btn-primary" @click="getProducts">Buscar</button>
             </div>
         </div>
     </div>
@@ -52,8 +47,8 @@
                         &nbsp;
                         <button
                             type="button"
-                            @click="deleteProduct(item.id)"
                             class="btn btn-sm btn-danger"
+                            @click="deleteProduct(item.id)"
                         >
                             Eliminar
                         </button>
@@ -67,27 +62,26 @@
 </template>
 
 <script>
-import useProducts from "../../composables/products";
-import { onMounted } from "vue";
+import useProducts from '../../composables/products'
+import { onMounted } from 'vue'
 
 export default {
     setup() {
-        const { queryName, products, getProducts, destroyProduct } =
-            useProducts();
-        onMounted(getProducts);
+        const { queryName, products, getProducts, destroyProduct } = useProducts()
+        onMounted(getProducts)
 
         const deleteProduct = async (id) => {
-            if (!window.confirm("Estas Seguro?")) {
-                return;
+            if (!window.confirm('Estas Seguro?')) {
+                return
             }
-            await destroyProduct(id);
-            await getProducts();
-        };
+            await destroyProduct(id)
+            await getProducts()
+        }
         return {
             products,
             deleteProduct,
             queryName,
-        };
+        }
     },
-};
+}
 </script>

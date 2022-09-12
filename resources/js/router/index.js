@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router'
 
 import App from '../App.vue'
 
@@ -20,94 +20,91 @@ import PurchaseDetailsIndex from '../components/purchaseDetails/PurchaseDetailsI
 import PurchaseDetailsCreate from '../components/purchaseDetails/PurchaseDetailsCreate.vue'
 import PurchaseDetailsEdit from '../components/purchaseDetails/PurchaseDetailsEdit.vue'
 
-
-
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: App
-  },
-  {
-    path: '/products',
-    name: 'products.index',
-    component: ProductsIndex
-  },
-  {
-    path: '/products/create',
-    name: 'products.create',
-    component: ProductsCreate
-  },
-  {
-    path: '/products/:id/edit',
-    name: 'products.edit',
-    component: ProductsEdit,
-    props: true
-  },
-  {
-    path: '/suppliers',
-    name: 'suppliers.index',
-    component: SuppliersIndex
-  },
-  {
-    path: '/suppliers/create',
-    name: 'suppliers.create',
-    component: SuppliersCreate
-  },
-  {
-    path: '/suppliers/:id/edit',
-    name: 'suppliers.edit',
-    component: SuppliersEdit,
-    props: true
-  },
-  {
-    path: '/purchases',
-    name: 'purchases.index',
-    component: PurchasesIndex
-  },
-
-  {
-    path: '/purchases/create',
-    name: 'purchases.create',
-    component: PurchasesCreate
-  },
-  {
-    path: '/purchases/:id/edit',
-    name: 'purchases.edit',
-    component: PurchasesEdit,
-    props: true
-  },
     {
-    path: '/purchases/:id/show',
-    name: 'purchases.show',
-    component: PurchasesShow,
-    props: true
-  },
-  {
-    path: '/purchases/general',
-    name: 'purchases.general',
-    component: PurchasesGeneral
-  },
-  {
-    path: '/purchase-details',
-    name: 'purchaseDetails.index',
-    component: PurchaseDetailsIndex
-  },
-  {
-    path: '/purchase-details/create',
-    name: 'purchaseDetails.create',
-    component: PurchaseDetailsCreate
-  },
-  {
-    path: '/purchase-details/:id/edit',
-    name: 'purchaseDetails.edit',
-    component: PurchaseDetailsEdit,
-    props: true
-  }
+        path: '/',
+        name: 'home',
+        component: App,
+    },
+    {
+        path: '/products',
+        name: 'products.index',
+        component: ProductsIndex,
+    },
+    {
+        path: '/products/create',
+        name: 'products.create',
+        component: ProductsCreate,
+    },
+    {
+        path: '/products/:id/edit',
+        name: 'products.edit',
+        component: ProductsEdit,
+        props: true,
+    },
+    {
+        path: '/suppliers',
+        name: 'suppliers.index',
+        component: SuppliersIndex,
+    },
+    {
+        path: '/suppliers/create',
+        name: 'suppliers.create',
+        component: SuppliersCreate,
+    },
+    {
+        path: '/suppliers/:id/edit',
+        name: 'suppliers.edit',
+        component: SuppliersEdit,
+        props: true,
+    },
+    {
+        path: '/purchases',
+        name: 'purchases.index',
+        component: PurchasesIndex,
+    },
+
+    {
+        path: '/purchases/create',
+        name: 'purchases.create',
+        component: PurchasesCreate,
+    },
+    {
+        path: '/purchases/:id/edit',
+        name: 'purchases.edit',
+        component: PurchasesEdit,
+        props: true,
+    },
+    {
+        path: '/purchases/:id/show',
+        name: 'purchases.show',
+        component: PurchasesShow,
+        props: true,
+    },
+    {
+        path: '/purchases/general',
+        name: 'purchases.general',
+        component: PurchasesGeneral,
+    },
+    {
+        path: '/purchase-details',
+        name: 'purchaseDetails.index',
+        component: PurchaseDetailsIndex,
+    },
+    {
+        path: '/purchase-details/create',
+        name: 'purchaseDetails.create',
+        component: PurchaseDetailsCreate,
+    },
+    {
+        path: '/purchase-details/:id/edit',
+        name: 'purchaseDetails.edit',
+        component: PurchaseDetailsEdit,
+        props: true,
+    },
 ]
 
-
 export default createRouter({
-  history: createWebHistory(),
-  routes
+    history: createWebHistory(),
+    routes,
 })

@@ -14,18 +14,13 @@
         <div class="col-md-4">
             <div class="form-group d-flex">
                 <input
+                    v-model="queryName"
                     type="text"
                     class="form-control"
                     placeholder="Buscar por nombre"
-                    v-model="queryName"
                 />
                 &nbsp;
-                <button
-                    @click="getPurchaseDetails"
-                    class="btn btn-sm btn-primary"
-                >
-                    Buscar
-                </button>
+                <button class="btn btn-sm btn-primary" @click="getPurchaseDetails">Buscar</button>
             </div>
         </div>
     </div>
@@ -63,8 +58,8 @@
                         &nbsp;
                         <button
                             type="button"
-                            @click="deletePurchaseDetail(item.id)"
                             class="btn btn-sm btn-danger"
+                            @click="deletePurchaseDetail(item.id)"
                         >
                             Eliminar
                         </button>
@@ -74,38 +69,31 @@
         </tbody>
     </table>
 
-    <Pagination
-        :data="purchaseDetails"
-        @pagination-change-page="getPurchaseDetails"
-    />
+    <Pagination :data="purchaseDetails" @pagination-change-page="getPurchaseDetails" />
 </template>
 
 <script>
-import usePurchaseDetails from "../../composables/purchaseDetails";
-import { onMounted } from "vue";
+import usePurchaseDetails from '../../composables/purchaseDetails'
+import { onMounted } from 'vue'
 
 export default {
     setup() {
-        const {
-            queryName,
-            purchaseDetails,
-            getPurchaseDetails,
-            destroyPurchaseDetail,
-        } = usePurchaseDetails();
-        onMounted(getPurchaseDetails);
+        const { queryName, purchaseDetails, getPurchaseDetails, destroyPurchaseDetail } =
+            usePurchaseDetails()
+        onMounted(getPurchaseDetails)
 
         const deletePurchaseDetail = async (id) => {
-            if (!window.confirm("Estas Seguro?")) {
-                return;
+            if (!window.confirm('Estas Seguro?')) {
+                return
             }
-            await destroyPurchaseDetail(id);
-            await getPurchaseDetails();
-        };
+            await destroyPurchaseDetail(id)
+            await getPurchaseDetails()
+        }
         return {
             purchaseDetails,
             deletePurchaseDetail,
             queryName,
-        };
+        }
     },
-};
+}
 </script>

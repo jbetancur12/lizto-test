@@ -3,7 +3,7 @@
 
     <div v-if="errors">
         <div v-for="(v, k) in errors" :key="k">
-            <p class="text-danger" v-for="error in v" :key="error">
+            <p v-for="error in v" :key="error" class="text-danger">
                 {{ error }}
             </p>
         </div>
@@ -13,9 +13,9 @@
         <div class="from-group">
             <label for="">Estado</label>
             <select
+                v-model="form.state"
                 class="form-select"
                 aria-label="Default select example"
-                v-model="form.state"
                 name="state"
             >
                 <option value="IN_PROGRESS">In Progress</option>
@@ -27,12 +27,12 @@
         <div class="from-group">
             <label for="">Product</label>
             <select
+                v-model="form.product_id"
                 class="form-select"
                 aria-label="Default select example"
-                v-model="form.product_id"
                 name="product_id"
             >
-                <option v-for="product in products.data" :value="product.id">
+                <option v-for="product in products.data" :key="product.id" :value="product.id">
                     {{ product.name }}
                 </option>
             </select>
@@ -41,23 +41,13 @@
         <div class="from-group">
             <label for="">Quantity</label>
 
-            <input
-                v-model="form.quantity"
-                type="number"
-                name="quantity"
-                class="form-control"
-            />
+            <input v-model="form.quantity" type="number" name="quantity" class="form-control" />
         </div>
 
         <div class="from-group">
             <label for="">Cost per Unit</label>
 
-            <input
-                v-model="form.cost"
-                type="number"
-                name="cost"
-                class="form-control"
-            />
+            <input v-model="form.cost" type="number" name="cost" class="form-control" />
         </div>
 
         <div class="from-group">
@@ -78,45 +68,45 @@
 </template>
 
 <script>
-import { onMounted, reactive } from "vue";
-import useProducts from "../../composables/products";
-import usePurchases from "../../composables/purchases";
-import useSuppliers from "../../composables/suppliers";
+import { onMounted, reactive } from 'vue'
+import useProducts from '../../composables/products'
+import usePurchases from '../../composables/purchases'
+import useSuppliers from '../../composables/suppliers'
 
 export default {
     setup() {
-        const { errors, storePurchase } = usePurchases();
-        const { products, getProducts } = useProducts();
+        const { errors, storePurchase } = usePurchases()
+        const { products, getProducts } = useProducts()
 
         onMounted(() => {
-            getProducts();
-        });
+            getProducts()
+        })
 
         const form = reactive({
-            state: "IN_PROGRESS",
+            state: 'IN_PROGRESS',
             total_cost: 1000,
             purchase_id: null,
             product_id: null,
             cost: 0,
             quantity: 0,
-        });
+        })
 
         const savePurchase = async () => {
-            await storePurchase({ ...form });
-        };
+            await storePurchase({ ...form })
+        }
         return {
             form,
             savePurchase,
             errors,
             products,
-        };
+        }
     },
     computed: {
         grandTotal() {
-            let costTotal = this.form.cost * this.form.quantity;
-            this.form.total_cost = costTotal;
-            return costTotal;
+            let costTotal = this.form.cost * this.form.quantity
+            this.form.total_cost = costTotal
+            return costTotal
         },
     },
-};
+}
 </script>

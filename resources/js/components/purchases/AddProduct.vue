@@ -23,20 +23,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(purchaseDetail, index) in purchaseDetails.products">
+                <tr v-for="(purchaseDetail, index) in purchaseDetails.products" :key="index">
                     <td>
                         <select
+                            v-model="purchaseDetail.product_id"
                             class="form-select"
                             aria-label="Default select example"
-                            v-model="purchaseDetail.product_id"
                             name="product_id"
-                            :disabled="
-                                props.state === 'RECEIVED' ||
-                                props.state === 'CANCELLED'
-                            "
+                            :disabled="props.state === 'RECEIVED' || props.state === 'CANCELLED'"
                         >
                             <option
                                 v-for="product in products.data"
+                                :key="product.id"
                                 :value="product.id"
                             >
                                 {{ product.name }}
@@ -45,47 +43,32 @@
                     </td>
                     <td>
                         <input
+                            v-model="purchaseDetail.quantity"
                             type="number"
                             class="form-control"
                             placeholder="Quantity"
                             aria-label="Quantity"
                             name="quantity"
-                            v-model="purchaseDetail.quantity"
-                            :readonly="
-                                props.state === 'RECEIVED' ||
-                                props.state === 'CANCELLED'
-                            "
-                            @input="
-                                purchaseDetails.totalCost(index),
-                                    purchaseDetails.sumTotal()
-                            "
+                            :readonly="props.state === 'RECEIVED' || props.state === 'CANCELLED'"
+                            @input="purchaseDetails.totalCost(index), purchaseDetails.sumTotal()"
                         />
                     </td>
                     <td>
                         <input
+                            v-model="purchaseDetail.cost"
                             type="number"
                             class="form-control"
                             placeholder="Cost"
                             aria-label="Cost"
                             name="'cost"
-                            :readonly="
-                                props.state === 'RECEIVED' ||
-                                props.state === 'CANCELLED'
-                            "
-                            v-model="purchaseDetail.cost"
-                            @input="
-                                purchaseDetails.totalCost(index),
-                                    purchaseDetails.sumTotal()
-                            "
+                            :readonly="props.state === 'RECEIVED' || props.state === 'CANCELLED'"
+                            @input="purchaseDetails.totalCost(index), purchaseDetails.sumTotal()"
                         />
                     </td>
                     <td>{{ formatter.format(purchaseDetail.total_cost) }}</td>
                     <td>
-                        <div class="col" v-show="props.state === 'IN_PROGRESS'">
-                            <button
-                                class="btn btn-danger"
-                                @click="removeRow(index)"
-                            >
+                        <div v-show="props.state === 'IN_PROGRESS'" class="col">
+                            <button class="btn btn-danger" @click="removeRow(index)">
                                 <span class="fa fa-minus"></span>
                             </button>
                         </div>
@@ -97,44 +80,46 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-import useProducts from "../../composables/products";
-import usePurchaseDetails from "../../composables/purchaseDetails";
-import usePurchase from "../../composables/purchases";
-import { usePurchaseStore } from "../../stores/purchaseStore";
-import { formatter } from "../../helpers/helpers.js";
-import CurrencyInput from "../common/InputCurrency";
+import { onMounted } from 'vue'
+import useProducts from '../../composables/products'
+import usePurchaseDetails from '../../composables/purchaseDetails'
+import usePurchase from '../../composables/purchases'
+import { usePurchaseStore } from '../../stores/purchaseStore'
+import { formatter } from '../../helpers/helpers.js'
 
-const { purchaseDetails: pDetails, getPurchaseDetails } = usePurchaseDetails();
-const { purchaseDetails: p } = usePurchaseDetails();
+const { purchaseDetails: pDetails, getPurchaseDetails } = usePurchaseDetails()
+const { purchaseDetails: p } = usePurchaseDetails()
 
-const { products, getProducts } = useProducts();
+const { products, getProducts } = useProducts()
 
-const props = defineProps(["purchaseId", "state"]);
+const props = defineProps({
+    purchaseId: { type: Number, default: 0 },
+    state: { type: String, default: 'IN_PROGRESS' },
+})
 
 // console.log(purchaseDetails.products);
 
 onMounted(() => {
-    getProducts();
-    getPurchaseDetails(props.purchaseId);
-});
+    getProducts()
+    getPurchaseDetails(props.purchaseId)
+})
 
-const purchaseDetails = usePurchaseStore();
+const purchaseDetails = usePurchaseStore()
 
 if (props.purchaseId) {
-    purchaseDetails.products = pDetails;
+    purchaseDetails.products = pDetails
 }
 const addRow = () => {
     purchaseDetails.products.push({
-        product_id: "",
+        product_id: '',
         quantity: 0,
         cost: 0,
         total_cost: 0,
-    });
-};
+    })
+}
 
 const removeRow = (index) => {
-    purchaseDetails.products.splice(index, 1);
-    purchaseDetails.sumTotal();
-};
+    purchaseDetails.products.splice(index, 1)
+    purchaseDetails.sumTotal()
+}
 </script>

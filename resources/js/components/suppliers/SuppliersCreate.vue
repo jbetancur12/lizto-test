@@ -3,7 +3,7 @@
 
     <div v-if="errors">
         <div v-for="(v, k) in errors" :key="k">
-            <p class="text-danger" v-for="error in v" :key="error">
+            <p v-for="error in v" :key="error" class="text-danger">
                 {{ error }}
             </p>
         </div>
@@ -12,12 +12,7 @@
     <form @submit.prevent="saveSupplier">
         <div class="from-group">
             <label for="">Nombre del Suppliers</label>
-            <input
-                v-model="form.name"
-                type="text"
-                name="name"
-                class="form-control"
-            />
+            <input v-model="form.name" type="text" name="name" class="form-control" />
         </div>
         <div class="form-group mt-2">
             <button class="btn btn-sm btn-success">Guardar</button>
@@ -26,25 +21,25 @@
 </template>
 
 <script>
-import { reactive } from "vue";
-import useSuppliers from "../../composables/suppliers";
+import { reactive } from 'vue'
+import useSuppliers from '../../composables/suppliers'
 
 export default {
     setup() {
-        const { errors, storeSupplier } = useSuppliers();
+        const { errors, storeSupplier } = useSuppliers()
         const form = reactive({
-            name: "",
-        });
+            name: '',
+        })
 
         const saveSupplier = async () => {
-            await storeSupplier({ ...form });
-        };
+            await storeSupplier({ ...form })
+        }
 
         return {
             form,
             saveSupplier,
             errors,
-        };
+        }
     },
-};
+}
 </script>

@@ -1,6 +1,6 @@
-import axios from "axios"
-import { ref } from "vue"
-import { useRouter } from "vue-router"
+import axios from 'axios'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default function useProducts() {
     const errors = ref([])
@@ -25,13 +25,12 @@ export default function useProducts() {
         products.value = response.data
     }
 
-
     const storeProduct = async (data) => {
         errors.value = ''
         try {
-            await axios.post('/api/products', data);
-            swal("Success!", "Product already created!", "success");
-            await router.push({ name: "products.index" })
+            await axios.post('/api/products', data)
+            swal('Success!', 'Product already created!', 'success')
+            await router.push({ name: 'products.index' })
         } catch (error) {
             if (error.response.status === 422) {
                 errors.value = error.response.data.errors
@@ -42,16 +41,15 @@ export default function useProducts() {
     const updateProduct = async (id) => {
         errors.value = ''
         try {
-            await axios.put('/api/products/' + id, product.value);
-            swal("Success!", "Purchase already updated!", "success");
-            await router.push({ name: "products.index" })
+            await axios.put('/api/products/' + id, product.value)
+            swal('Success!', 'Purchase already updated!', 'success')
+            await router.push({ name: 'products.index' })
         } catch (error) {
             if (error.response.status === 422) {
                 errors.value = error.response.data.errors
             }
         }
     }
-
 
     const destroyProduct = async (id) => {
         await axios.delete('api/products/' + id)

@@ -5,9 +5,9 @@
         <div class="from-group">
             <label for="">Estado</label>
             <select
+                v-model="purchase.state"
                 class="form-select"
                 aria-label="Default select example"
-                v-model="purchase.state"
                 name="state"
             >
                 <option value="IN_PROGRESS">In Progress</option>
@@ -40,12 +40,8 @@
                 class="form-control"
             /> -->
 
-            <select
-                v-model="purchase.supplier_id"
-                name="supplier_id"
-                class="form-select"
-            >
-                <option v-for="supplier in suppliers.data" :value="supplier.id">
+            <select v-model="purchase.supplier_id" name="supplier_id" class="form-select">
+                <option v-for="supplier in suppliers.data" :key="supplier.id" :value="supplier.id">
                     {{ supplier.name }}
                 </option>
             </select>
@@ -57,9 +53,9 @@
 </template>
 
 <script>
-import usePurchases from "../../composables/purchases";
-import useSuppliers from "../../composables/suppliers";
-import { onMounted } from "vue";
+import usePurchases from '../../composables/purchases'
+import useSuppliers from '../../composables/suppliers'
+import { onMounted } from 'vue'
 export default {
     props: {
         id: {
@@ -68,24 +64,23 @@ export default {
         },
     },
     setup(props) {
-        const { errors, purchase, getPurchase, updatePurchase } =
-            usePurchases();
-        const { suppliers, getSuppliers } = useSuppliers();
+        const { errors, purchase, getPurchase, updatePurchase } = usePurchases()
+        const { suppliers, getSuppliers } = useSuppliers()
         onMounted(() => {
-            getPurchase(props.id);
-            getSuppliers();
-        });
+            getPurchase(props.id)
+            getSuppliers()
+        })
 
         const savePurchase = async () => {
-            await updatePurchase(props.id);
-        };
+            await updatePurchase(props.id)
+        }
 
         return {
             errors,
             purchase,
             savePurchase,
             suppliers,
-        };
+        }
     },
-};
+}
 </script>

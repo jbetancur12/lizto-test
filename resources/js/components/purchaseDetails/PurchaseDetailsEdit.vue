@@ -5,23 +5,23 @@
         <div class="from-group">
             <label for="">Product</label>
             <select
+                v-model="purchaseDetail.product_id"
                 class="form-select"
                 aria-label="Default select example"
-                v-model="purchaseDetail.product_id"
                 name="product_id"
             >
-                <option v-for="product in products.data" :value="product.id">
+                <option v-for="product in products.data" :key="product.id" :value="product.id">
                     {{ product.name }}
                 </option>
             </select>
             <label for="">Purchase Id</label>
             <select
+                v-model="purchaseDetail.purchase_id"
                 class="form-select"
                 aria-label="Default select example"
-                v-model="purchaseDetail.purchase_id"
                 name="purchase_id"
             >
-                <option v-for="purchase in purchases.data" :value="purchase.id">
+                <option v-for="purchase in purchases.data" :key="purchase.id" :value="purchase.id">
                     {{ purchase.id }}
                 </option>
             </select>
@@ -39,12 +39,7 @@
         <div class="from-group">
             <label for="">Costo</label>
 
-            <input
-                v-model="purchaseDetail.cost"
-                type="number"
-                name="cost"
-                class="form-control"
-            />
+            <input v-model="purchaseDetail.cost" type="number" name="cost" class="form-control" />
         </div>
         <div class="from-group">
             <label for="">Costo Total</label>
@@ -64,10 +59,10 @@
 </template>
 
 <script>
-import usePurchaseDetails from "../../composables/purchaseDetails";
-import { onMounted } from "vue";
-import useProducts from "../../composables/products";
-import usePurchases from "../../composables/purchases";
+import usePurchaseDetails from '../../composables/purchaseDetails'
+import { onMounted } from 'vue'
+import useProducts from '../../composables/products'
+import usePurchases from '../../composables/purchases'
 export default {
     props: {
         id: {
@@ -76,23 +71,19 @@ export default {
         },
     },
     setup(props) {
-        const {
-            errors,
-            purchaseDetail,
-            getPurchaseDetail,
-            updatePurchaseDetail,
-        } = usePurchaseDetails();
-        const { products, getProducts } = useProducts();
-        const { purchases, getPurchases } = usePurchases();
+        const { errors, purchaseDetail, getPurchaseDetail, updatePurchaseDetail } =
+            usePurchaseDetails()
+        const { products, getProducts } = useProducts()
+        const { purchases, getPurchases } = usePurchases()
         onMounted(() => {
-            getPurchaseDetail(props.id);
-            getProducts();
-            getPurchases();
-        });
+            getPurchaseDetail(props.id)
+            getProducts()
+            getPurchases()
+        })
 
         const savePurchaseDetail = async () => {
-            await updatePurchaseDetail(props.id);
-        };
+            await updatePurchaseDetail(props.id)
+        }
 
         return {
             errors,
@@ -100,7 +91,7 @@ export default {
             savePurchaseDetail,
             products,
             purchases,
-        };
+        }
     },
-};
+}
 </script>

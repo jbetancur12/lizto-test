@@ -4,12 +4,7 @@
     <form @submit.prevent="saveSupplier">
         <div class="from-group">
             <label for="">Nombre del Suppliers</label>
-            <input
-                v-model="supplier.name"
-                type="text"
-                name="name"
-                class="form-control"
-            />
+            <input v-model="supplier.name" type="text" name="name" class="form-control" />
         </div>
         <div class="form-group mt-2">
             <button class="btn btn-sm btn-success">Guardar</button>
@@ -18,8 +13,8 @@
 </template>
 
 <script>
-import useSuppliers from "../../composables/suppliers";
-import { onMounted } from "vue";
+import useSuppliers from '../../composables/suppliers'
+import { onMounted } from 'vue'
 export default {
     props: {
         id: {
@@ -28,18 +23,17 @@ export default {
         },
     },
     setup(props) {
-        const { errors, supplier, getSupplier, updateSupplier } =
-            useSuppliers();
-        onMounted(getSupplier(props.id));
+        const { errors, supplier, getSupplier, updateSupplier } = useSuppliers()
+        onMounted(getSupplier(props.id))
 
         const saveSupplier = async () => {
-            await updateSupplier(props.id);
-        };
+            await updateSupplier(props.id)
+        }
         return {
             errors,
             supplier,
             saveSupplier,
-        };
+        }
     },
-};
+}
 </script>
