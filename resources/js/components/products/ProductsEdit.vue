@@ -1,13 +1,13 @@
 <template>
-    <h5><span class="badge bg-success">Editar Producto</span></h5>
+    <h5><span class="badge bg-success">Edit Product</span></h5>
 
     <form @submit.prevent="saveProduct">
         <div class="from-group">
-            <label for="">Nombre del Producto</label>
+            <label for="">Product Name</label>
             <input v-model="product.name" type="text" name="name" class="form-control" />
         </div>
         <div class="form-group mt-2">
-            <button class="btn btn-sm btn-success">Guardar</button>
+            <button class="btn btn-sm btn-success">Save</button>
         </div>
     </form>
 </template>

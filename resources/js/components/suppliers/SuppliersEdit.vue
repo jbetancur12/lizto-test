@@ -1,13 +1,13 @@
 <template>
-    <h5><span class="badge bg-success">Editar Suppliers</span></h5>
+    <h5><span class="badge bg-success">Edita Supplier</span></h5>
 
     <form @submit.prevent="saveSupplier">
         <div class="from-group">
-            <label for="">Nombre del Suppliers</label>
+            <label for="">Supplier Name</label>
             <input v-model="supplier.name" type="text" name="name" class="form-control" />
         </div>
         <div class="form-group mt-2">
-            <button class="btn btn-sm btn-success">Guardar</button>
+            <button class="btn btn-sm btn-success">Save</button>
         </div>
     </form>
 </template>

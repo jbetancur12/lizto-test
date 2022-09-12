@@ -1,5 +1,5 @@
 <template>
-    <h5><span class="badge bg-success">Crear PurchaseDetailo</span></h5>
+    <h5><span class="badge bg-success">Create Purchase Detail</span></h5>
 
     <div v-if="errors">
         <div v-for="(v, k) in errors" :key="k">
@@ -33,25 +33,19 @@
                     {{ purchase.id }}
                 </option>
             </select>
-            <!-- <input
-                v-model="form.state"
-                type="text"
-                name="state"
-                class="form-control"
-            /> -->
         </div>
         <div class="from-group">
-            <label for="">Cantidad</label>
+            <label for="">Quantity</label>
 
             <input v-model="form.quantity" type="number" name="quantity" class="form-control" />
         </div>
         <div class="from-group">
-            <label for="">Costo</label>
+            <label for="">Cost</label>
 
             <input v-model="form.cost" type="number" name="cost" class="form-control" />
         </div>
         <div class="from-group">
-            <label for="">Costo Total</label>
+            <label for="">Total Cost</label>
 
             <input
                 :value="grandTotal"
@@ -63,7 +57,7 @@
         </div>
 
         <div class="form-group mt-2">
-            <button class="btn btn-sm btn-success">Guardar</button>
+            <button class="btn btn-sm btn-success">Save</button>
         </div>
     </form>
 </template>

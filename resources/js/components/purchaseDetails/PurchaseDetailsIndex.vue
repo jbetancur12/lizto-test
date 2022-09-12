@@ -1,12 +1,12 @@
 <template>
-    <h5><span class="badge bg-success">Listado Detalle de Compra</span></h5>
+    <h5><span class="badge bg-success">List Purchase Detail</span></h5>
 
     <div class="text-end">
         <router-link
             :to="{ name: 'purchaseDetails.create' }"
             type="button"
             class="btn btn-sm btn-primary"
-            >Nuevo</router-link
+            >New</router-link
         >
     </div>
 
@@ -20,7 +20,7 @@
                     placeholder="Buscar por nombre"
                 />
                 &nbsp;
-                <button class="btn btn-sm btn-primary" @click="getPurchaseDetails">Buscar</button>
+                <button class="btn btn-sm btn-primary" @click="getPurchaseDetails">Search</button>
             </div>
         </div>
     </div>
@@ -29,11 +29,11 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Purchase ID</th>
+                <th scope="col">Purchase Id</th>
                 <th scope="col">Product Id</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Costo</th>
-                <th scope="col">Costo Total</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Total Cost</th>
                 <!-- <th scope="col">Acciones</th> -->
             </tr>
         </thead>
@@ -53,7 +53,7 @@
                                 params: { id: item.id },
                             }"
                             class="btn btn-sm btn-primary"
-                            >Editar
+                            >Edit
                         </router-link>
                         &nbsp;
                         <button
@@ -61,7 +61,7 @@
                             class="btn btn-sm btn-danger"
                             @click="deletePurchaseDetail(item.id)"
                         >
-                            Eliminar
+                            Delete
                         </button>
                     </td>
                 </tr>

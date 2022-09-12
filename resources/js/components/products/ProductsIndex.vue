@@ -1,9 +1,9 @@
 <template>
-    <h5><span class="badge bg-success">Listado de Productos</span></h5>
+    <h5><span class="badge bg-success">Products List</span></h5>
 
     <div class="text-end">
         <router-link :to="{ name: 'products.create' }" type="button" class="btn btn-sm btn-primary"
-            >Nuevo</router-link
+            >New</router-link
         >
     </div>
 
@@ -17,7 +17,7 @@
                     placeholder="Buscar por nombre"
                 />
                 &nbsp;
-                <button class="btn btn-sm btn-primary" @click="getProducts">Buscar</button>
+                <button class="btn btn-sm btn-primary" @click="getProducts">Search</button>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">Name</th>
                 <!-- <th scope="col">Acciones</th> -->
             </tr>
         </thead>
@@ -42,7 +42,7 @@
                                 params: { id: item.id },
                             }"
                             class="btn btn-sm btn-primary"
-                            >Editar
+                            >Edit
                         </router-link>
                         &nbsp;
                         <button
@@ -50,7 +50,7 @@
                             class="btn btn-sm btn-danger"
                             @click="deleteProduct(item.id)"
                         >
-                            Eliminar
+                            Delete
                         </button>
                     </td>
                 </tr>

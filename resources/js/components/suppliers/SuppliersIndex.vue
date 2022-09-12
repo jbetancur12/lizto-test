@@ -1,5 +1,5 @@
 <template>
-    <h5><span class="badge bg-success">Listado de Suppliers</span></h5>
+    <h5><span class="badge bg-success">Suppliers List</span></h5>
 
     <div class="text-end">
         <router-link :to="{ name: 'suppliers.create' }" type="button" class="btn btn-sm btn-primary"
@@ -17,7 +17,7 @@
                     placeholder="Buscar por nombre"
                 />
                 &nbsp;
-                <button class="btn btn-sm btn-primary" @click="getSuppliers">Buscar</button>
+                <button class="btn btn-sm btn-primary" @click="getSuppliers">Search</button>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">Name</th>
                 <!-- <th scope="col">Acciones</th> -->
             </tr>
         </thead>
@@ -50,7 +50,7 @@
                             class="btn btn-sm btn-danger"
                             @click="deleteSupplier(item.id)"
                         >
-                            Eliminar
+                            Delete
                         </button>
                     </td>
                 </tr>

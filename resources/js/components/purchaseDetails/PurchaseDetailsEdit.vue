@@ -1,5 +1,5 @@
 <template>
-    <h5><span class="badge bg-success">Editar PurchaseDetailo</span></h5>
+    <h5><span class="badge bg-success">Edit Purchase Detail</span></h5>
 
     <form @submit.prevent="savePurchaseDetail">
         <div class="from-group">
@@ -27,7 +27,7 @@
             </select>
         </div>
         <div class="from-group">
-            <label for="">Cantidad</label>
+            <label for="">Quantity</label>
 
             <input
                 v-model="purchaseDetail.quantity"
@@ -37,12 +37,12 @@
             />
         </div>
         <div class="from-group">
-            <label for="">Costo</label>
+            <label for="">Cost</label>
 
             <input v-model="purchaseDetail.cost" type="number" name="cost" class="form-control" />
         </div>
         <div class="from-group">
-            <label for="">Costo Total</label>
+            <label for="">Total Cost</label>
 
             <input
                 v-model="purchaseDetail.total_cost"
@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group mt-2">
-            <button class="btn btn-sm btn-success">Guardar</button>
+            <button class="btn btn-sm btn-success">Save</button>
         </div>
     </form>
 </template>
