@@ -12,25 +12,7 @@
     <form>
         <div class="row">
             <div class="col-7">
-                <div class="from-group">
-                    <!-- <label for="">Estado</label>
-                    <select
-                        class="form-select"
-                        aria-label="Default select example"
-                        v-model="form.state"
-                        name="state"
-                    >
-                        <option value="IN_PROGRESS">In Progress</option>
-                        <option value="RECEIVED">Received</option>
-                        <option value="CANCELLED">Canceled</option>
-                    </select> -->
-                    <!-- <input
-                v-model="form.state"
-                type="text"
-                name="state"
-                class="form-control"
-            /> -->
-                </div>
+                <div class="from-group"></div>
                 <div class="from-group">
                     <label for="">Supplier</label>
                     <select
@@ -75,7 +57,9 @@
         <hr class="bg-secondary border-2 border-top border-secondary" />
         <div class="d-flex justify-content-end align-items-baseline gap-2 mr-5">
             <strong>Total:</strong>
-            <span>&nbsp;{{ purchaseDetails.grandTotal }}</span>
+            <span
+                >&nbsp;{{ formatter.format(purchaseDetails.grandTotal) }}</span
+            >
         </div>
 
         <div class="form-group mt-2">
@@ -95,7 +79,7 @@ import usePurchases from "../../composables/purchases";
 import useSuppliers from "../../composables/suppliers";
 import AddProduct from "./AddProduct.vue";
 import { usePurchaseStore } from "../../stores/purchaseStore";
-import { status } from "../../helpers/helpers.js";
+import { status, formatter } from "../../helpers/helpers.js";
 
 const { errors, storePurchase } = usePurchases();
 const { suppliers, getSuppliers } = useSuppliers();

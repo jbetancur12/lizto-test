@@ -70,7 +70,7 @@
                             "
                         />
                     </td>
-                    <td>{{ purchaseDetail.total_cost }}</td>
+                    <td>{{ formatter.format(purchaseDetail.total_cost) }}</td>
                     <td>
                         <div class="col" v-show="props.state === 'IN_PROGRESS'">
                             <button
@@ -93,6 +93,7 @@ import useProducts from "../../composables/products";
 import usePurchaseDetails from "../../composables/purchaseDetails";
 import usePurchase from "../../composables/purchases";
 import { usePurchaseStore } from "../../stores/purchaseStore";
+import { formatter } from "../../helpers/helpers.js";
 
 const { purchaseDetails: pDetails, getPurchaseDetails } = usePurchaseDetails();
 const { purchaseDetails: p } = usePurchaseDetails();
