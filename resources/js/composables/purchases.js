@@ -32,7 +32,7 @@ export default function usePurchases() {
             total_cost: data.total_cost,
             supplier_id: data.supplier_id,
         }
-        const dataPurchaseDetails = { ...data.products }
+
 
         try {
             const purchaseCreated = await axios.post('/api/purchases', dataPurchase)
@@ -46,6 +46,7 @@ export default function usePurchases() {
             swal('Success!', 'Purchase already created!', 'success')
             await router.push({ name: 'purchases.index' })
         } catch (error) {
+            console.log(error.response);
             if (error.response.status === 422) {
                 errors.value = error.response.data.errors
             }

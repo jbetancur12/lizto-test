@@ -43,9 +43,6 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $product = Product::create($request->validated());
-        error_log("---->");
-        error_log($product);
-
         return new ProductResource($product);
     }
 
