@@ -30,6 +30,7 @@ export default function useSuppliers() {
         errors.value = ''
         try {
             await axios.post('/api/suppliers', data);
+            swal("Success!", "Supplier already created!", "success");
             await router.push({ name: "suppliers.index" })
         } catch (error) {
             if (error.response.status === 422) {
@@ -42,6 +43,7 @@ export default function useSuppliers() {
         errors.value = ''
         try {
             await axios.put('/api/suppliers/' + id, supplier.value);
+            swal("Success!", "Purchase already updated!", "success");
             await router.push({ name: "suppliers.index" })
         } catch (error) {
             if (error.response.status === 422) {

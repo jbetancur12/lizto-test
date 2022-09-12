@@ -2,6 +2,7 @@ import axios from "axios"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { usePurchaseStore } from "../stores/purchaseStore";
+import swal from 'sweetalert';
 
 export default function usePurchases() {
     const purchaseDetailsStore = usePurchaseStore()
@@ -31,20 +32,21 @@ export default function usePurchases() {
     const storePurchase = async (data) => {
         errors.value = ''
         const dataPurchase = {
-                state: data.state,
-                total_cost: data.total_cost,
-                supplier_id: data.supplier_id,
+            state: data.state,
+            total_cost: data.total_cost,
+            supplier_id: data.supplier_id,
 
         }
-         const dataPurchaseDetails = { ...data.products }
+        const dataPurchaseDetails = { ...data.products }
 
 
         try {
             const purchaseCreated = await axios.post('/api/purchases', dataPurchase);
 
-            const newArray = data.products.map(item => ({...item, purchase_id:purchaseCreated.data.data.id}))
+            const newArray = data.products.map(item => ({ ...item, purchase_id: purchaseCreated.data.data.id }))
 
-           await axios.post('/api/purchase-details', newArray);
+            await axios.post('/api/purchase-details', newArray);
+            swal("Success!", "Purchase already created!", "success");
             await router.push({ name: "purchases.index" })
         } catch (error) {
             if (error.response.status === 422) {
@@ -59,14 +61,15 @@ export default function usePurchases() {
         try {
             const purchaseUpdated = await axios.put('/api/purchases/' + id, purchase.value);
             const purchase_id = purchaseUpdated.data.data.id
-            for(const item of purchaseDetailsStore.products ){
-                if(item.hasOwnProperty('purchase_id')){
+            for (const item of purchaseDetailsStore.products) {
+                if (item.hasOwnProperty('purchase_id')) {
                     await axios.put('/api/purchase-details/' + item.id, item);
-                }else{
-                    await axios.post('/api/purchase-details', [{...item, purchase_id: purchase_id}])
+                } else {
+                    await axios.post('/api/purchase-details', [{ ...item, purchase_id: purchase_id }])
                 }
             }
             // await axios.put('/api/purchase-details/', newArray )
+            swal("Success!", "Purchase already updated!", "success");
             await router.push({ name: "purchases.index" })
         } catch (error) {
             if (error.response.status === 422) {
