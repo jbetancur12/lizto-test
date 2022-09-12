@@ -58,8 +58,15 @@ export default function usePurchases() {
 
         try {
             const purchaseUpdated = await axios.put('/api/purchases/' + id, purchase.value);
-            const newArray = purchaseDetailsStore.products.map(item => ({...item, purchase_id:purchaseUpdated.data.data.id}))
-            await axios.put('/api/purchase-details/', newArray )
+            const purchase_id = purchaseUpdated.data.data.id
+            for(const item of purchaseDetailsStore.products ){
+                if(item.hasOwnProperty('purchase_id')){
+                    await axios.put('/api/purchase-details/' + item.id, item);
+                }else{
+                    await axios.post('/api/purchase-details', [{...item, purchase_id: purchase_id}])
+                }
+            }
+            // await axios.put('/api/purchase-details/', newArray )
             await router.push({ name: "purchases.index" })
         } catch (error) {
             if (error.response.status === 422) {
