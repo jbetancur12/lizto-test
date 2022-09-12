@@ -46,7 +46,12 @@
                     >
                         Receive
                     </button>
-                    <button class="btn btn-danger">Cancel</button>
+                    <button
+                        @click.prevent="cancelledState"
+                        class="btn btn-danger"
+                    >
+                        Cancel
+                    </button>
                 </div>
             </div>
         </div>
@@ -96,6 +101,10 @@ const form = reactive({
 
 const receiveState = () => {
     form.state = "RECEIVED";
+};
+
+const cancelledState = () => {
+    form.state = "CANCELLED";
 };
 
 const savePurchase = async () => {

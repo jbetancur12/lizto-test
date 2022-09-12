@@ -21,7 +21,10 @@
                         v-model="purchase.supplier_id"
                         name="supplier_id"
                         class="form-select"
-                        :disabled="purchase.state === 'RECEIVED'"
+                        :disabled="
+                            purchase.state === 'RECEIVED' ||
+                            purchase.state === 'CANCELLED'
+                        "
                     >
                         <option
                             v-for="supplier in suppliers.data"
@@ -49,7 +52,12 @@
                     >
                         Receive
                     </button>
-                    <button class="btn btn-danger">Cancel</button>
+                    <button
+                        @click.prevent="cancelledState"
+                        class="btn btn-danger"
+                    >
+                        Cancel
+                    </button>
                 </div>
             </div>
         </div>
@@ -82,6 +90,7 @@ import useSuppliers from "../../composables/suppliers";
 import AddProduct from "./AddProduct.vue";
 import { usePurchaseStore } from "../../stores/purchaseStore";
 import { status } from "../../helpers/helpers.js";
+import swal from "sweetalert";
 
 const { errors, purchase, getPurchase, updatePurchase } = usePurchases();
 
@@ -98,6 +107,25 @@ const purchaseDetails = usePurchaseStore();
 
 const receiveState = () => {
     purchase.value.state = "RECEIVED";
+};
+
+const cancelledState = () => {
+    swal({
+        title: "Are you sure?",
+        text: "Once cancelled, you will not be able to recover this state",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            purchase.value.state = "CANCELLED";
+            swal("Your state is now cancelled!", {
+                icon: "success",
+            });
+        } else {
+            swal("The state was not changed");
+        }
+    });
 };
 
 const savePurchase = async () => {

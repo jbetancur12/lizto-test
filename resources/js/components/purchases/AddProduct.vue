@@ -30,7 +30,10 @@
                             aria-label="Default select example"
                             v-model="purchaseDetail.product_id"
                             name="product_id"
-                            :disabled="props.state === 'RECEIVED'"
+                            :disabled="
+                                props.state === 'RECEIVED' ||
+                                props.state === 'CANCELLED'
+                            "
                         >
                             <option
                                 v-for="product in products.data"
@@ -48,7 +51,10 @@
                             aria-label="Quantity"
                             name="quantity"
                             v-model="purchaseDetail.quantity"
-                            :readonly="props.state === 'RECEIVED'"
+                            :readonly="
+                                props.state === 'RECEIVED' ||
+                                props.state === 'CANCELLED'
+                            "
                             @input="
                                 purchaseDetails.totalCost(index),
                                     purchaseDetails.sumTotal()
@@ -62,7 +68,10 @@
                             placeholder="Cost"
                             aria-label="Cost"
                             name="'cost"
-                            :readonly="props.state === 'RECEIVED'"
+                            :readonly="
+                                props.state === 'RECEIVED' ||
+                                props.state === 'CANCELLED'
+                            "
                             v-model="purchaseDetail.cost"
                             @input="
                                 purchaseDetails.totalCost(index),

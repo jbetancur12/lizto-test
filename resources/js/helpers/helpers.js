@@ -1,6 +1,7 @@
 export const status = {
     IN_PROGRESS: 'In Progress',
-    RECEIVED: 'Received'
+    RECEIVED: 'Received',
+    CANCELLED: 'Cancelled'
 }
 
 // Create our number formatter.
