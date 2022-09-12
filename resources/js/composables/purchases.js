@@ -55,7 +55,7 @@ export default function usePurchases() {
 
     const updatePurchase = async (id) => {
         errors.value = ''
-        console.log(purchaseDetailsStore.products);
+
         try {
             const purchaseUpdated = await axios.put('/api/purchases/' + id, purchase.value);
             const newArray = purchaseDetailsStore.products.map(item => ({...item, purchase_id:purchaseUpdated.data.data.id}))
