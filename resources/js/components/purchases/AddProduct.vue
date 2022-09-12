@@ -94,6 +94,7 @@ import usePurchaseDetails from "../../composables/purchaseDetails";
 import usePurchase from "../../composables/purchases";
 import { usePurchaseStore } from "../../stores/purchaseStore";
 import { formatter } from "../../helpers/helpers.js";
+import CurrencyInput from "../common/InputCurrency";
 
 const { purchaseDetails: pDetails, getPurchaseDetails } = usePurchaseDetails();
 const { purchaseDetails: p } = usePurchaseDetails();

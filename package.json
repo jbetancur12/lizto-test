@@ -28,6 +28,7 @@
         "pinia": "^2.0.22",
         "sweetalert": "^2.1.2",
         "vue": "^3.2.36",
+        "vue-currency-input": "^3.0.0",
         "vue-loader": "^17.0.0",
         "vue-router": "^4.0.13"
     }
