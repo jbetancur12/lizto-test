@@ -1,12 +1,15 @@
 import axios from "axios"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
+import { usePurchaseStore } from "../stores/purchaseStore";
 
 export default function usePurchaseDetails() {
+    const purchaseDetailsStore = usePurchaseStore()
     const errors = ref([])
     const router = useRouter()
     const purchaseDetails = ref({})
     const purchaseDetail = ref([])
+    const purchaseDetailStore = purchaseDetailsStore.products
     // Search
     const queryName = ref('')
 
@@ -42,7 +45,7 @@ export default function usePurchaseDetails() {
     const updatePurchaseDetail = async (id) => {
         errors.value = ''
         try {
-            await axios.put('/api/purchase-details/' + id, purchaseDetail.value);
+            await axios.put('/api/purchase-details/' + id);
             await router.push({ name: "purchaseDetails.index" })
         } catch (error) {
             if (error.response.status === 422) {

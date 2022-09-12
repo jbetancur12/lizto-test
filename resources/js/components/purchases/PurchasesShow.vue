@@ -93,5 +93,7 @@ onMounted(() => {
 
 const purchaseDetails = usePurchaseStore();
 
-const savePurchase = async () => {};
+const savePurchase = async () => {
+    await updatePurchase(props.id);
+};
 </script>

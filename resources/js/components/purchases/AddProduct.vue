@@ -87,9 +87,11 @@
 import { onMounted } from "vue";
 import useProducts from "../../composables/products";
 import usePurchaseDetails from "../../composables/purchaseDetails";
+import usePurchase from "../../composables/purchases";
 import { usePurchaseStore } from "../../stores/purchaseStore";
 
 const { purchaseDetails: pDetails, getPurchaseDetails } = usePurchaseDetails();
+const { purchaseDetails: p } = usePurchaseDetails();
 
 const { products, getProducts } = useProducts();
 

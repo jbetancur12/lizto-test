@@ -71,11 +71,21 @@ class PurchaseDetailController extends Controller
      * @param  \App\Models\PurchaseDetail  $purchaseDetail
      * @return \Illuminate\Http\Response
      */
-    public function update(PurchaseDetailRequest $request, PurchaseDetail $purchaseDetail)
+    public function update(Request $request, PurchaseDetail $purchaseDetail)
     {
-        $purchaseDetail->update($request->validated());
 
-        return new PurchaseDetailResource($purchaseDetail);
+    //       $id = $request->query('purchase_id');
+
+    //     if(isset($id)){
+    //     return  DB::table('purchase_details')->where('purchase_id', $id)->get();
+    // }
+
+    ddd($request);
+
+        return PurchaseDetailResource::collection(PurchaseDetail::all());
+        // $purchaseDetail->update($request->validated());
+
+        // return new PurchaseDetailResource($purchaseDetail);
     }
 
     /**

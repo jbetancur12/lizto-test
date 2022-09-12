@@ -1,14 +1,19 @@
 import axios from "axios"
 import { ref } from "vue"
 import { useRouter } from "vue-router"
+import { usePurchaseStore } from "../stores/purchaseStore";
 
 export default function usePurchases() {
+    const purchaseDetailsStore = usePurchaseStore()
     const errors = ref([])
     const router = useRouter()
     const purchases = ref({})
+    let purchasesDetails = ref([])
     const purchase = ref([])
     // Search
     const queryName = ref('')
+
+
 
     const getPurchase = async (id) => {
         console.log(id);
@@ -31,9 +36,7 @@ export default function usePurchases() {
                 supplier_id: data.supplier_id,
 
         }
-         const dataPurchaseDetails = { ...data.products
-
-        }
+         const dataPurchaseDetails = { ...data.products }
 
 
         try {
@@ -41,9 +44,7 @@ export default function usePurchases() {
 
             const newArray = data.products.map(item => ({...item, purchase_id:purchaseCreated.data.data.id}))
 
-            console.log(newArray);
-
-            await axios.post('/api/purchase-details', newArray);
+           await axios.post('/api/purchase-details', newArray);
             await router.push({ name: "purchases.index" })
         } catch (error) {
             if (error.response.status === 422) {
@@ -54,8 +55,11 @@ export default function usePurchases() {
 
     const updatePurchase = async (id) => {
         errors.value = ''
+        console.log(purchaseDetailsStore.products);
         try {
-            await axios.put('/api/purchases/' + id, purchase.value);
+            const purchaseUpdated = await axios.put('/api/purchases/' + id, purchase.value);
+            const newArray = purchaseDetailsStore.products.map(item => ({...item, purchase_id:purchaseUpdated.data.data.id}))
+            await axios.put('/api/purchase-details/', newArray )
             await router.push({ name: "purchases.index" })
         } catch (error) {
             if (error.response.status === 422) {
@@ -73,6 +77,7 @@ export default function usePurchases() {
         errors,
         purchase,
         purchases,
+        purchasesDetails,
         queryName,
         getPurchase,
         getPurchases,
