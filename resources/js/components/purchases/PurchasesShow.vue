@@ -10,51 +10,53 @@
     </div>
 
     <form>
-        <div class="from-group">
-            <label for="">Estado</label>
-            <select
-                class="form-select"
-                aria-label="Default select example"
-                v-model="purchase.state"
-                name="state"
+        <div class="row">
+            <div class="col-7">
+                <div class="from-group">
+                    <label for="">Estado</label>
+                </div>
+                <div class="from-group">
+                    <label for="">Supplier Id</label>
+                    <select
+                        v-model="purchase.supplier_id"
+                        name="supplier_id"
+                        class="form-select"
+                        :disabled="purchase.state === 'RECEIVED'"
+                    >
+                        <option
+                            v-for="supplier in suppliers.data"
+                            :value="supplier.id"
+                        >
+                            {{ supplier.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div
+                class="col-5 d-flex justify-content-center align-items-center flex-column"
             >
-                <option value="IN_PROGRESS">In Progress</option>
-                <option value="RECEIVED">Received</option>
-                <option value="CANCELLED">Canceled</option>
-            </select>
-            <!-- <input
-                v-model="purchase.state"
-                type="text"
-                name="state"
-                class="form-control"
-            /> -->
-        </div>
-        <!-- <div class="from-group">
-            <label for="">Costo Total</label>
-
-            <input
-                :value="purchaseDetails.grandTotal"
-                type="number"
-                name="total_cost"
-                class="form-control"
-            />
-        </div> -->
-        <div class="from-group">
-            <label for="">Supplier Id</label>
-            <select
-                v-model="purchase.supplier_id"
-                name="supplier_id"
-                class="form-select"
-            >
-                <option v-for="supplier in suppliers.data" :value="supplier.id">
-                    {{ supplier.name }}
-                </option>
-            </select>
+                <div>
+                    <strong>Estado:</strong>
+                    <span>
+                        &nbsp;
+                        {{ status[purchase.state] }}
+                    </span>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                    <button
+                        class="btn btn-success"
+                        @click.prevent="receiveState"
+                    >
+                        Receive
+                    </button>
+                    <button class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
         </div>
 
         <hr class="bg-primary border-2 border-top border-primary" />
 
-        <AddProduct :purchaseId="props.id" />
+        <AddProduct :purchaseId="props.id" :state="purchase.state" />
         <hr class="bg-secondary border-2 border-top border-secondary" />
         <div class="d-flex justify-content-end align-items-baseline gap-2 mr-5">
             <strong>Total:</strong>
@@ -79,6 +81,7 @@ import usePurchaseDetails from "../../composables/purchaseDetails";
 import useSuppliers from "../../composables/suppliers";
 import AddProduct from "./AddProduct.vue";
 import { usePurchaseStore } from "../../stores/purchaseStore";
+import { status } from "../../helpers/helpers.js";
 
 const { errors, purchase, getPurchase, updatePurchase } = usePurchases();
 
@@ -92,6 +95,10 @@ onMounted(() => {
 });
 
 const purchaseDetails = usePurchaseStore();
+
+const receiveState = () => {
+    purchase.value.state = "RECEIVED";
+};
 
 const savePurchase = async () => {
     await updatePurchase(props.id);

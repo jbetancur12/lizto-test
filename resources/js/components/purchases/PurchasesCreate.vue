@@ -10,46 +10,63 @@
     </div>
 
     <form>
-        <div class="from-group">
-            <label for="">Estado</label>
-            <select
-                class="form-select"
-                aria-label="Default select example"
-                v-model="form.state"
-                name="state"
-            >
-                <option value="IN_PROGRESS">In Progress</option>
-                <option value="RECEIVED">Received</option>
-                <option value="CANCELLED">Canceled</option>
-            </select>
-            <!-- <input
+        <div class="row">
+            <div class="col-7">
+                <div class="from-group">
+                    <!-- <label for="">Estado</label>
+                    <select
+                        class="form-select"
+                        aria-label="Default select example"
+                        v-model="form.state"
+                        name="state"
+                    >
+                        <option value="IN_PROGRESS">In Progress</option>
+                        <option value="RECEIVED">Received</option>
+                        <option value="CANCELLED">Canceled</option>
+                    </select> -->
+                    <!-- <input
                 v-model="form.state"
                 type="text"
                 name="state"
                 class="form-control"
             /> -->
-        </div>
-        <!-- <div class="from-group">
-            <label for="">Costo Total</label>
-
-            <input
-                :value="purchaseDetails.grandTotal"
-                type="number"
-                name="total_cost"
-                class="form-control"
-            />
-        </div> -->
-        <div class="from-group">
-            <label for="">Supplier Id</label>
-            <select
-                v-model="form.supplier_id"
-                name="supplier_id"
-                class="form-select"
+                </div>
+                <div class="from-group">
+                    <label for="">Supplier</label>
+                    <select
+                        v-model="form.supplier_id"
+                        name="supplier_id"
+                        class="form-select"
+                    >
+                        <option
+                            v-for="supplier in suppliers.data"
+                            :value="supplier.id"
+                        >
+                            {{ supplier.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div
+                class="col-5 d-flex justify-content-center align-items-center flex-column"
             >
-                <option v-for="supplier in suppliers.data" :value="supplier.id">
-                    {{ supplier.name }}
-                </option>
-            </select>
+                <div>
+                    <strong>Estado:</strong>
+                    <span>
+                        &nbsp;
+                        {{ status[form.state] }}
+                    </span>
+                </div>
+                <div class="d-flex gap-2 mt-3">
+                    <button
+                        class="btn btn-success"
+                        @click.prevent="receiveState"
+                    >
+                        Receive
+                    </button>
+                    <button class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
         </div>
 
         <hr class="bg-primary border-2 border-top border-primary" />
@@ -78,6 +95,7 @@ import usePurchases from "../../composables/purchases";
 import useSuppliers from "../../composables/suppliers";
 import AddProduct from "./AddProduct.vue";
 import { usePurchaseStore } from "../../stores/purchaseStore";
+import { status } from "../../helpers/helpers.js";
 
 const { errors, storePurchase } = usePurchases();
 const { suppliers, getSuppliers } = useSuppliers();
@@ -87,10 +105,14 @@ onMounted(getSuppliers);
 const purchaseDetails = usePurchaseStore();
 
 const form = reactive({
-    state: "",
+    state: "IN_PROGRESS",
     total_cost: 1000,
     supplier_id: 3,
 });
+
+const receiveState = () => {
+    form.state = "RECEIVED";
+};
 
 const savePurchase = async () => {
     await storePurchase({

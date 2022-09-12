@@ -2,6 +2,7 @@
     <div>
         <div class="mb-3 text-end">
             <button
+                v-show="props.state === 'IN_PROGRESS'"
                 class="btn btn-secondary"
                 title="Click to add row"
                 @click.prevent="addRow"
@@ -29,6 +30,7 @@
                             aria-label="Default select example"
                             v-model="purchaseDetail.product_id"
                             name="product_id"
+                            :disabled="props.state === 'RECEIVED'"
                         >
                             <option
                                 v-for="product in products.data"
@@ -46,6 +48,7 @@
                             aria-label="Quantity"
                             name="quantity"
                             v-model="purchaseDetail.quantity"
+                            :readonly="props.state === 'RECEIVED'"
                             @input="
                                 purchaseDetails.totalCost(index),
                                     purchaseDetails.sumTotal()
@@ -59,6 +62,7 @@
                             placeholder="Cost"
                             aria-label="Cost"
                             name="'cost"
+                            :readonly="props.state === 'RECEIVED'"
                             v-model="purchaseDetail.cost"
                             @input="
                                 purchaseDetails.totalCost(index),
@@ -68,7 +72,7 @@
                     </td>
                     <td>{{ purchaseDetail.total_cost }}</td>
                     <td>
-                        <div class="col">
+                        <div class="col" v-show="props.state === 'IN_PROGRESS'">
                             <button
                                 class="btn btn-danger"
                                 @click="removeRow(index)"
@@ -95,7 +99,7 @@ const { purchaseDetails: p } = usePurchaseDetails();
 
 const { products, getProducts } = useProducts();
 
-const props = defineProps(["purchaseId"]);
+const props = defineProps(["purchaseId", "state"]);
 
 // console.log(purchaseDetails.products);
 
