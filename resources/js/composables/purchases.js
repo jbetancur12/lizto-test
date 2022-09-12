@@ -20,8 +20,8 @@ export default function usePurchases() {
         purchase.value = response.data.data
     }
 
-    const getPurchases = async (page) => {
-        let response = await axios.get('/api/purchases?page=' + page + '&name=' + queryName.value)
+    const getPurchases = async () => {
+        let response = await axios.get('/api/purchases')
         purchases.value = response.data
     }
 

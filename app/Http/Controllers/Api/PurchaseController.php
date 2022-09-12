@@ -16,7 +16,8 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        return PurchaseResource::collection(Purchase::all());
+        // return PurchaseResource::collection(Purchase::all());
+        return Purchase::join('suppliers', 'purchases.supplier_id', '=', 'suppliers.id')->get(['purchases.*', 'suppliers.name as supplier']);
     }
 
     /**

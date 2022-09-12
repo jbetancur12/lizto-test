@@ -31,18 +31,18 @@
         <th scope="col">#</th>
         <th scope="col">State</th>
         <th scope="col">Total Cost</th>
-        <th scope="col">Supplier Id</th>
+        <th scope="col">Supplier</th>
         <th scope="col">Date</th>
         <!-- <th scope="col">Acciones</th> -->
       </tr>
     </thead>
     <tbody>
-      <template v-for="item in purchases.data" :key="item.id">
+      <template v-for="item in purchases" :key="item.id">
         <tr>
           <th scope="row">{{ item.id }}</th>
           <td>{{ item.state }}</td>
-          <td>{{ item.total_cost }}</td>
-          <td>{{ item.supplier_id }}</td>
+          <td>{{ formatter.format(item.total_cost) }}</td>
+          <td>{{ item.supplier }}</td>
           <td>{{ formatDate(item.created_at) }}</td>
           <td>
             <router-link
@@ -82,13 +82,12 @@
 <script setup>
 import usePurchases from "../../composables/purchases";
 import { onMounted } from "vue";
-import { formatDate } from "../../helpers/helpers.js";
+import { formatDate, formatter } from "../../helpers/helpers.js";
 
 const { queryName, purchases, getPurchases, destroyPurchase } = usePurchases();
 onMounted(getPurchases);
-
 const deletePurchase = async (id) => {
-  if (!window.confirm("Estas Seguro?")) {
+  if (!window.confirm("Are you sure?")) {
     return;
   }
   await destroyPurchase(id);
