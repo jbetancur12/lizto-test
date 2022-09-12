@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useCounterStore = defineStore('purchaseDetails', {
+export const usePurchaseStore = defineStore('purchaseDetails', {
     state: () => {
         return {
             grandTotal: 0,
@@ -19,8 +19,11 @@ export const useCounterStore = defineStore('purchaseDetails', {
             this.products[index].total_cost = this.products[index].quantity * this.products[index].cost
         },
         sumTotal(){
-            this.grandTotal =  this.products.map(item => item.total_cost).reduce((prev,next)=> prev+next)
-
+            const grandTotal =  this.products.map(item => item.total_cost).reduce((prev,next)=> Number(prev)+Number(next))
+            this.grandTotal = grandTotal
+        },
+        getFromApi(values){
+           this.products = values
         }
     },
 })

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PurchaseDetailRequest;
 use App\Http\Resources\PurchaseDetailResource;
 use \Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseDetailController extends Controller
 {
@@ -15,9 +16,19 @@ class PurchaseDetailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        $id = $request->query('purchase_id');
+
+        if(isset($id)){
+        return  DB::table('purchase_details')->where('purchase_id', $id)->get();}
+
         return PurchaseDetailResource::collection(PurchaseDetail::all());
+    }
+
+    public function findByPurchase(){
+        return  DB::table('purchase_details')->where('purchase_id', 2)->get();
     }
 
     /**

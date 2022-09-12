@@ -47,6 +47,15 @@
                     <td>
                         <router-link
                             :to="{
+                                name: 'purchases.show',
+                                params: { id: item.id },
+                            }"
+                            class="btn btn-sm btn-primary"
+                            >Ver
+                        </router-link>
+                        &nbsp;
+                        <router-link
+                            :to="{
                                 name: 'purchases.edit',
                                 params: { id: item.id },
                             }"

@@ -86,16 +86,27 @@
 <script setup>
 import { onMounted } from "vue";
 import useProducts from "../../composables/products";
-import { useCounterStore } from "../../stores/purchaseStore";
+import usePurchaseDetails from "../../composables/purchaseDetails";
+import { usePurchaseStore } from "../../stores/purchaseStore";
+
+const { purchaseDetails: pDetails, getPurchaseDetails } = usePurchaseDetails();
 
 const { products, getProducts } = useProducts();
 
+const props = defineProps(["purchaseId"]);
+
+// console.log(purchaseDetails.products);
+
 onMounted(() => {
     getProducts();
+    getPurchaseDetails(props.purchaseId);
 });
 
-const purchaseDetails = useCounterStore();
+const purchaseDetails = usePurchaseStore();
 
+if (props.purchaseId) {
+    purchaseDetails.products = pDetails;
+}
 const addRow = () => {
     purchaseDetails.products.push({
         product_id: "",

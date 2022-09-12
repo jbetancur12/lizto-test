@@ -11,6 +11,7 @@ export default function usePurchases() {
     const queryName = ref('')
 
     const getPurchase = async (id) => {
+        console.log(id);
         let response = await axios.get('/api/purchases/' + id)
         purchase.value = response.data.data
     }

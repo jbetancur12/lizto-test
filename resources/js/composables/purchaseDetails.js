@@ -20,8 +20,9 @@ export default function usePurchaseDetails() {
     //     purchaseDetails.value = response.data.data
     // }
 
-    const getPurchaseDetails = async (page) => {
-        let response = await axios.get('/api/purchase-details?page=' + page + '&name=' + queryName.value)
+    const getPurchaseDetails = async (purchaseId='') => {
+
+        let response = await axios.get('/api/purchase-details?purchase_id=' + purchaseId)
         purchaseDetails.value = response.data
     }
 

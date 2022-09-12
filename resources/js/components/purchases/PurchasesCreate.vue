@@ -77,14 +77,14 @@ import { onMounted, reactive } from "vue";
 import usePurchases from "../../composables/purchases";
 import useSuppliers from "../../composables/suppliers";
 import AddProduct from "./AddProduct.vue";
-import { useCounterStore } from "../../stores/purchaseStore";
+import { usePurchaseStore } from "../../stores/purchaseStore";
 
 const { errors, storePurchase } = usePurchases();
 const { suppliers, getSuppliers } = useSuppliers();
 
 onMounted(getSuppliers);
 
-const purchaseDetails = useCounterStore();
+const purchaseDetails = usePurchaseStore();
 
 const form = reactive({
     state: "",
