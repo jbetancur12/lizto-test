@@ -30,5 +30,8 @@ export const usePurchaseStore = defineStore('purchaseDetails', {
         getFromApi(values) {
             this.products = values
         },
+        updateTotal(value) {
+            this.grandTotal = value
+        }
     },
 })

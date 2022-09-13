@@ -40,7 +40,7 @@
       <template v-for="item in purchases" :key="item.id">
         <tr>
           <th scope="row">{{ item.id }}</th>
-          <td>{{ item.state }}</td>
+          <td>{{ status[item.state] }}</td>
           <td>{{ formatter.format(item.total_cost) }}</td>
           <td>{{ item.supplier }}</td>
           <td>{{ formatDate(item.created_at) }}</td>
@@ -82,7 +82,7 @@
 <script setup>
 import usePurchases from "../../composables/purchases";
 import { onMounted } from "vue";
-import { formatDate, formatter } from "../../helpers/helpers.js";
+import { formatDate, formatter, status } from "../../helpers/helpers.js";
 
 const { queryName, purchases, getPurchases, destroyPurchase } = usePurchases();
 onMounted(getPurchases);

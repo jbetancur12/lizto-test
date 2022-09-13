@@ -15,9 +15,9 @@ export default function usePurchases() {
     const queryName = ref('')
 
     const getPurchase = async (id) => {
-        console.log(id)
         let response = await axios.get('/api/purchases/' + id)
         purchase.value = response.data.data
+        purchaseDetailsStore.updateTotal(response.data.data.total_cost);
     }
 
     const getPurchases = async () => {
@@ -55,7 +55,7 @@ export default function usePurchases() {
 
     const updatePurchase = async (id) => {
         errors.value = ''
-
+        purchase.value.total_cost = purchaseDetailsStore.grandTotal
         try {
             const purchaseUpdated = await axios.put('/api/purchases/' + id, purchase.value)
             const purchase_id = purchaseUpdated.data.data.id
